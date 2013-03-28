@@ -1,0 +1,31 @@
+# This variables files contains the version numbers of the software packages
+# which will be installed without the package management tool.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+# linfo - http://linfo.sourceforge.net/
+linfo_version: 1.8.1
+
+# piwik - http://piwik.org/
+piwik_version: 1.11.1
+
+# phpsysinfo - http://rk4an.github.com/phpsysinfo/
+phpsysinfo_version: 3.1.2
+
+# phpshell - http://phpshell.sourceforge.net/
+phpshell_version: 2.4
+
+# NOWASP (Mutillidae) - http://sourceforge.net/projects/mutillidae/
+mutillidae_version: 2.4.8
+
+# Damn Vulnerable Web App (DVWA) - http://www.dvwa.co.uk/
+dvwa_version: 1.0.7
+
+# phpMyAdmin- http://www.phpmyadmin.net/
+phpmyadmin_version: 3.5.7
+
+# bWAPP - http://sourceforge.net/projects/bwapp/
+bwapp_version: 1.3
