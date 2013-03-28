@@ -1,0 +1,32 @@
+# This playbook contains operations to perform package management tasks on
+# Fedora hosts. dnf is used as the package maintanance tool  
+# (http://fedoraproject.org/wiki/Features/DNF).
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+  - name: update the package list
+    command: /usr/bin/dnf update
+    tags: update_cache
+
+  - name: update all packages
+    command: /usr/bin/dnf upgrade
+    tags: update
+
+  - name: enable local cache
+    command: /usr/bin/dnf makecache
+    tags: make_cache
+
+  - name: install a package
+    command: /usr/bin/dnf install $add_pkg
+    tags: add_pkg
+
+  - name: remove a package
+    command: /usr/bin/dnf erase $del_pkg
+    tags: del_pkg
+
+  - name: clean package cache
+    command: /usr/bin/dnf clean all
+    tags: clean
