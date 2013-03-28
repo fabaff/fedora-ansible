@@ -1,0 +1,20 @@
+# This files contains service handlers for Fedora.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+# 
+# Usage:
+#  handlers:
+#    - include: handlers/services.yml
+
+---
+# Control handlers for sshd 
+  - name: start sshd
+    service: name=sshd state=started
+
+  - name: stop sshd
+    service: name=sshd state=stopped
+
+  - name: restart sshd
+    service: name=sshd state=restarted
