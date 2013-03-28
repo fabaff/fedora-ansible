@@ -1,0 +1,20 @@
+#######################################################################
+##
+##  FastCGI Module 
+## --------------- 
+##
+## http://www.lighttpd.net/documentation/fastcgi.html
+##
+server.modules += ( "mod_fastcgi" )
+
+
+fastcgi.server             = ( ".php" =>
+                               ( "localhost" =>
+                                 (
+                                   "socket" => "/var/run/lighttpd/php-fastcgi.socket",
+                                   "bin-path" => "/usr/bin/php-cgi"
+                                 )
+                               )
+                            )
+
+## This file is managed by Ansible.
