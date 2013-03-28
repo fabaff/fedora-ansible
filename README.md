@@ -27,7 +27,7 @@ yum -y install python
 Add the SSH key to the *authorized_keys* file.
 
 ```bash
-ssh root@[IP of the management system] 'cat ~/.ssh/id_rsa.pub' | cat - >> ~/.ssh/authorized_keys
+ssh root@10.0.0.11 'cat ~/.ssh/id_rsa.pub' | cat - >> ~/.ssh/authorized_keys
 ```
 
 ## Structure
