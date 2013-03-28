@@ -1,0 +1,57 @@
+# This playbook install the lighttpd with FastCGI and PHP.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install the lighttpd web server
+  command: /usr/bin/dnf -y install lighttpd
+
+- name: install php packages
+  command: /usr/bin/dnf -y install $item 
+  with_items:
+    - lighttpd-fastcgi
+    - php-cli
+
+- name: enable fastcgi support in modules.conf
+  lineinfile: dest=/etc/lighttpd/modules.conf
+              regexp='^include "conf.d/fastcgi.conf"'
+              insertafter='^#include "conf.d/fastcgi.conf"'
+              line='include "conf.d/fastcgi.conf"'
+              state=present
+
+- name: enable fastcgi support
+  template: src=files/fastcgi.j2 
+            dest=/etc/lighttpd/conf.d/fastcgi.conf
+            owner=lighttpd
+            group=lighttpd
+            mode=0644
+  notify:
+    - start lighttpd
+
+- name: enable lighttpd on boot
+  command: systemctl enable lighttpd.service
+# Why is this not working?
+#  service: name=lighttpd enabled=yes
+#  service: name=lighttpd.service enabled=yes
+# -> msg: service name not recognized
+# Seems to be a bug
+
+- name: configure firewall
+  command: firewall-cmd --add-service=http
+
+- name: add some details to the default index.html file
+  lineinfile: dest=/var/www/lighttpd/index.html
+              regexp='^<body>'
+              insertafter='^<body>'
+              line='<body>\n\n<h3>Lighttpd is running on $ansible_distribution $ansible_distribution_version.</h3>'
+              state=present
+
+# If you want your own index.html file
+#- name: install a default index.html file
+#  template: src=files/lighttpd.j2 
+#            dest=/var/www/lighttpd/index.html
+#            owner=lighttpd
+#            group=lighttpd
+#            mode=0644
