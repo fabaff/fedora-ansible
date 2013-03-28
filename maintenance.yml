@@ -1,0 +1,25 @@
+# This playbook contains example maintenance tasks which could be performed 
+# on a running Fedora system. 
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+# Usage: ansible-playbook maintenance.yml -f 10
+#        sudo ansible-playbook maintenance.yml --tags "update"
+---
+- hosts: fedora
+  user: root
+  tasks:
+
+# Package management tasks
+# Available tags:
+#  update
+#  make_cache
+#  add_pkg (needs --extra-vars "add_pkg=Package name")
+#  del_pkg (needs --extra-vars ""del_pkg=Package name")
+#  clean
+  - include: tasks/pkg-management.yml
+
+  handlers:
+   - include: handlers/system.yml
