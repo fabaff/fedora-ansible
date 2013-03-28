@@ -7,10 +7,6 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-  - name: update the package list
-    command: /usr/bin/dnf update
-    tags: update_cache
-
   - name: update all packages
     command: /usr/bin/dnf upgrade
     tags: update
