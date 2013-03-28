@@ -1,11 +1,17 @@
 # This variables files contains the version numbers of the software packages
-# which will be installed without the package management tool.
+# which will be installed without the package management tool and basic release
+# number as helper variables for playbooks.
 #
 # Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
+# Fedora - http://fedoraporject.org
+fedora_previous: 17
+fedora_current: 18
+fedora_next: 19
+
 # linfo - http://linfo.sourceforge.net/
 linfo_version: 1.8.1
 
