@@ -8,7 +8,7 @@
 #
 ---
   - name: update all packages
-    command: /usr/bin/dnf upgrade
+    command: /usr/bin/dnf -y upgrade
     tags: update
 
   - name: enable local cache
@@ -16,11 +16,11 @@
     tags: make_cache
 
   - name: install a package
-    command: /usr/bin/dnf install $add_pkg
+    command: /usr/bin/dnf -y install $add_pkg
     tags: add_pkg
 
   - name: remove a package
-    command: /usr/bin/dnf erase $del_pkg
+    command: /usr/bin/dnf -y erase $del_pkg
     tags: del_pkg
 
   - name: clean package cache
