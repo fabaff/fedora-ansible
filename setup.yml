@@ -16,7 +16,9 @@
 
   tasks:
     - include: tasks/motd.yml
-    - include: tasks/rpmfusion.yml
+#    - include: tasks/rpmfusion.yml
+#    - include: tasks/sshd.yml
 
   handlers:
    - include: handlers/system.yml
+   - include: handlers/services.yml
