@@ -31,7 +31,15 @@
             owner=root
             group=root
             mode=0755
-            backup=yes
+#            backup=yes
+
+- name: remove lighttpd default file
+  file: path=/var/www/lighttpd/$item state=absent
+  with_items:
+    - light_logo.png
+    - favicon.ico
+    - light_button.png
+    - poweredby.png
 
 - name: remove package
   command: /usr/bin/dnf -y erase unzip
