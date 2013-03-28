@@ -1,4 +1,4 @@
-# This playbook upgrades all Fedora hosts and initialize a reboot.
+# This playbook update all Fedora hosts.
 #
 # Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
 #
