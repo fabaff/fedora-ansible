@@ -18,3 +18,13 @@
 
 - name: restart sshd
   service: name=sshd state=restarted
+
+# Control handlers for lighttpd 
+- name: start lighttpd
+  service: name=lighttpd state=started
+
+- name: stop lighttpd
+  service: name=lighttpd state=stopped
+
+- name: restart lighttpd
+  service: name=lighttpd state=restarted
