@@ -1,0 +1,21 @@
+# This variables file contains the default password for system, user, and
+# database accounts.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+# For the Ansible examples:
+# python -c 'import crypt; print crypt.crypt("Password", "$1$SomeSalt$")'
+---
+# Server root password
+server_root_password: password
+
+# Client root password
+client_root_password: password
+
+# Default user password
+default_user_password: password
+
+# Default mysql password
+default_mysql_password: password
