@@ -7,7 +7,7 @@
 # Usage:
 #  handlers:
 #    - include: handlers/system.yml
-
+# 
 ---
-  - name: reboot system
-    command: /usr/sbin/reboot -d 5
+- name: reboot system
+  command: /usr/sbin/reboot
