@@ -1,4 +1,4 @@
-# Alpine Linux - Ansible Contrib Repository
+# Fedora - Ansible Contrib Repository
 
 This repository contains user-contributed real world examples for Ansible
 playbooks, especially for Fedora and its downstream (RHEL), as well as modules
@@ -24,7 +24,6 @@ the Python package.
 ```bash
 yum -y install python
 ```
-
 Add the SSH key to the *authorized_keys* file.
 
 ```bash
@@ -49,7 +48,7 @@ At the moment the structure of the repository looks like this:
 ```
 
 ## Warning
-*Think first* before you implement stuff from this repository. Consider the 
+**Think first** before you implement stuff from this repository. Consider the 
 playbooks in this repository as a show case. Somethings doesn't make sense, are
 nasty hacks, or easier to do with another approach. 
 
