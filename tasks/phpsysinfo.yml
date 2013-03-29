@@ -1,0 +1,44 @@
+# This playbook install the PhpSysInfo (http://rk4an.github.com/phpsysinfo/) 
+# php application.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install archive tool
+  command: /usr/bin/dnf -y install tar
+
+- name: install additional php packages
+  command: /usr/bin/dnf -y install $item 
+  with_items:
+    - php-xml 
+    - php-mbstring
+
+- name: download the phpsysinfo source tarball
+  get_url: url=https://github.com/rk4an/phpsysinfo/archive/v$phpsysinfo_version.tar.gz
+           dest=/var/www/lighttpd/phpsysinfo-$phpsysinfo_version.tar.gz
+           mode=0440
+
+- name: unpack the source tarball
+  command: /usr/bin/tar -xzf /var/www/lighttpd/phpsysinfo-$phpsysinfo_version.tar.gz -C /var/www/lighttpd/
+
+- name: rename the source directory
+  command: /usr/bin/mv /var/www/lighttpd/phpsysinfo-$phpsysinfo_version /var/www/lighttpd/phpsysinfo
+
+- name: delete the source tarball
+  command: /usr/bin/rm /var/www/lighttpd/phpsysinfo-$phpsysinfo_version.tar.gz
+
+- name: copy the default config file
+  command: /usr/bin/cp /var/www/lighttpd/phpsysinfo/phpsysinfo.ini.new /var/www/lighttpd/phpsysinfo/phpsysinfo.ini
+
+- name: set the permissions
+  file: path=/var/www/lighttpd
+        mode=0777
+        state=directory
+
+- name: restart lighttpd
+  service: name=lighttpd state=restarted
+
+- name: remove archive tool
+  command: /usr/bin/dnf -y erase tar
