@@ -18,4 +18,4 @@ client_root_password: password
 default_user_password: password
 
 # Default mysql password
-default_mysql_password: password
+mysql_root_password: password
