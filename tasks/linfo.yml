@@ -9,7 +9,7 @@
 - name: install archive tool
   command: /usr/bin/dnf -y install tar
 
-- name: download the linfo source tarball
+- name: download the source tarball
   get_url: url=http://sourceforge.net/projects/linfo/files/Linfo%20Stable%20Releases/linfo-$linfo_version.tar.gz
            dest=/var/www/lighttpd/linfo-$linfo_version.tar.gz
            mode=0440
@@ -30,6 +30,12 @@
   file: path=/var/www/lighttpd/
         mode=0777
         state=directory
+
+- name: add a new entry to the index.html page
+  lineinfile: dest=/var/www/lighttpd/index.html
+              regexp='^<!--IN-->'
+              insertafter='        <!--IN-->'
+              line='        <a href="/linfo" class="btn btn-primary">linfo</a>'
 
 - name: restart lighttpd
   service: name=lighttpd state=restarted

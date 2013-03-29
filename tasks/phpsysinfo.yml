@@ -37,6 +37,12 @@
         mode=0777
         state=directory
 
+- name: add a new entry to the index.html page
+  lineinfile: dest=/var/www/lighttpd/index.html
+              regexp='^<!--IN-->'
+              insertafter='        <!--IN-->'
+              line='        <a href="/phpsysinfo" class="btn btn-primary">phpSysInfo</a>'
+
 - name: restart lighttpd
   service: name=lighttpd state=restarted
 
