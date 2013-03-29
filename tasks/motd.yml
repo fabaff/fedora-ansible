@@ -5,9 +5,9 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-  - name: put a default motd file in place
-    template: src=files/motd.j2
-              dest=/etc/motd
-              owner=root
-              group=root
-              mode=0644
+- name: put a default motd file in place
+  template: src=files/motd.j2
+            dest=/etc/motd
+            owner=root
+            group=root
+            mode=0644
