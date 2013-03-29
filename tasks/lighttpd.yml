@@ -38,8 +38,8 @@
 # -> msg: service name not recognized
 # Seems to be a bug
 
-- name: configure firewall
-  command: firewall-cmd --add-service=http
+- name: configure firewall, allow http traffic
+  command: firewall-cmd --permanent --add-service=http
 
 - name: add some details to the default index.html file
   lineinfile: dest=/var/www/lighttpd/index.html
