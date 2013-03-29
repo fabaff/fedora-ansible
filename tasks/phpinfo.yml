@@ -15,7 +15,8 @@
 
 - name: create a new file with lineinfile
   lineinfile: dest=/var/www/lighttpd/phpinfo/index.php
-              regexp='^' line=''
+              regexp='^'
+              line=''
               state=present
               create=True
 
