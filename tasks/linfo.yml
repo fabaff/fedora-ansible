@@ -1,0 +1,38 @@
+# This playbook install the linfo (http://linfo.sourceforge.net/) php
+# application.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install archive tool
+  command: /usr/bin/dnf -y install tar
+
+- name: download the linfo source tarball
+  get_url: url=http://sourceforge.net/projects/linfo/files/Linfo%20Stable%20Releases/linfo-$linfo_version.tar.gz
+           dest=/var/www/lighttpd/linfo-$linfo_version.tar.gz
+           mode=0440
+
+- name: unpack the source tarball
+  command: /usr/bin/tar -xzf /var/www/lighttpd/linfo-$linfo_version.tar.gz -C /var/www/lighttpd/
+
+- name: rename the source directory
+  command: /usr/bin/mv /var/www/lighttpd/linfo-$linfo_version /var/www/lighttpd/linfo
+
+- name: delete the source tarball
+  command: /usr/bin/rm /var/www/lighttpd/linfo-$linfo_version.tar.gz
+
+- name: copy the default config file
+  command: /usr/bin/cp /var/www/lighttpd/linfo/sample.config.inc.php /var/www/lighttpd/linfo/config.inc.php
+
+- name: set the permissions
+  file: path=/var/www/lighttpd/
+        mode=0777
+        state=directory
+
+- name: restart lighttpd
+  service: name=lighttpd state=restarted
+
+- name: remove archive tool
+  command: /usr/bin/dnf -y erase tar
