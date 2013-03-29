@@ -1,0 +1,40 @@
+# This playbook install a simple file for displaying details about the PHP
+# installation.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: create the phpinfo directory
+  file: path=/var/www/lighttpd/phpinfo
+        owner=root
+        group=root
+        mode=0777
+        state=directory
+
+- name: create a new file with lineinfile
+  lineinfile: dest=/var/www/lighttpd/phpinfo/index.php
+              regexp='^' line=''
+              state=present
+              create=True
+
+- name: add a multiline string to the file and delete the string from before
+  lineinfile: dest=/var/www/lighttpd/phpinfo/index.php
+              regexp='^'
+              line='<?php\nphpinfo();\n?>'
+              state=present
+
+- name: set the permissions
+  file: path=/var/www/lighttpd/
+        mode=0777
+        state=directory
+
+- name: add a new entry to the index.html page
+  lineinfile: dest=/var/www/lighttpd/index.html
+              regexp='^<!--IN-->'
+              insertafter='        <!--IN-->'
+              line='        <a href="/phpinfo" class="btn btn-primary">phpInfo</a>'
+
+- name: restart lighttpd
+  service: name=lighttpd state=restarted
