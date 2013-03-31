@@ -5,9 +5,6 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install archive tool
-  command: /usr/bin/dnf -y install tar
-
 - name: install additional php packages
   command: /usr/bin/dnf -y install $item 
   with_items:
