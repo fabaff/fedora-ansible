@@ -6,7 +6,7 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install archive tool
+- name: install archiver tool
   command: /usr/bin/dnf -y install tar
 
 - name: install additional php packages
@@ -26,8 +26,9 @@
 - name: rename the source directory
   command: /usr/bin/mv /var/www/lighttpd/phpsysinfo-$phpsysinfo_version /var/www/lighttpd/phpsysinfo
 
-- name: delete the source tarball
-  command: /usr/bin/rm /var/www/lighttpd/phpsysinfo-$phpsysinfo_version.tar.gz
+- name: delete the archive
+  file: path=/var/www/lighttpd/phpsysinfo-$phpsysinfo_version.tar.gz
+        state=absent
 
 - name: copy the default config file
   command: /usr/bin/cp /var/www/lighttpd/phpsysinfo/phpsysinfo.ini.new /var/www/lighttpd/phpsysinfo/phpsysinfo.ini
@@ -46,5 +47,5 @@
 - name: restart lighttpd
   service: name=lighttpd state=restarted
 
-- name: remove archive tool
+- name: remove archiver tool
   command: /usr/bin/dnf -y erase tar
