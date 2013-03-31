@@ -35,3 +35,6 @@ phpmyadmin_version: 3.5.7
 
 # bWAPP - http://sourceforge.net/projects/bwapp/
 bwapp_version: 1.3
+
+# ani-shell - http://sourceforge.net/projects/ani-shell/
+ani_version: 1.5
