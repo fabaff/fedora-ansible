@@ -5,7 +5,7 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install archive tool
+- name: install archiver tool
   command: /usr/bin/dnf -y install tar
 
 - name: download the source tarball
@@ -34,5 +34,5 @@
               insertafter='        <!--SH-->'
               line='        <a href="/phpshell/phpshell.php" class="btn btn-primary">PHPShell</a>'
 
-- name: remove archive tool
+- name: remove archiver tool
   command: /usr/bin/dnf -y erase tar
