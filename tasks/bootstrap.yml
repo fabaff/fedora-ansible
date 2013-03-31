@@ -6,7 +6,7 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install needed package
+- name: install archiver package
   command: /usr/bin/dnf -y install unzip
 
 - name: downloads the bootstrap zip archive
@@ -18,7 +18,8 @@
   command: /usr/bin/unzip -o /var/www/lighttpd/bootstrap.zip -d /var/www/lighttpd/
 
 - name: delete the archive
-  command: /usr/bin/rm /var/www/lighttpd/bootstrap.zip
+  file: path=/var/www/lighttpd/bootstrap.zip
+        state=absent
 
 - name: set the right permission
   file: path=/var/www/lighttpd/
@@ -33,7 +34,7 @@
             mode=0755
 #            backup=yes
 
-- name: remove lighttpd default file
+- name: remove lighttpd default file (images)
   file: path=/var/www/lighttpd/$item state=absent
   with_items:
     - light_logo.png
@@ -41,5 +42,5 @@
     - light_button.png
     - poweredby.png
 
-- name: remove package
+- name: remove archiver package
   command: /usr/bin/dnf -y erase unzip
