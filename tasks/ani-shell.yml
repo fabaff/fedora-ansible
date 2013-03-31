@@ -20,9 +20,6 @@
 - name: unpack the archive
   command: /usr/bin/unzip -o /var/www/lighttpd/ani-shell-$ani_version.zip -d /var/www/lighttpd/ani-shell
 
-#- name: delete the archive
-#  command: /usr/bin/rm /var/www/lighttpd/ani-shell-$ani_version.zip
-
 - name: delete the archive
   file: path=/var/www/lighttpd/ani-shell-$ani_version.zip
         state=absent
