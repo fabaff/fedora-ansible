@@ -6,11 +6,11 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: create the phpinfo directory
+- name: create the needed directory
   file: path=/var/www/lighttpd/phpinfo
         owner=root
         group=root
-        mode=0777
+        mode=0755
         state=directory
 
 - name: create a new file with lineinfile
@@ -36,6 +36,3 @@
               regexp='^<!--IN-->'
               insertafter='        <!--IN-->'
               line='        <a href="/phpinfo" class="btn btn-primary">phpInfo</a>'
-
-- name: restart lighttpd
-  service: name=lighttpd state=restarted
