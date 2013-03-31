@@ -6,7 +6,7 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install unzip packages
+- name: install archiver package
   command: /usr/bin/dnf -y install unzip
 
 - name: downloads the archive
@@ -18,7 +18,8 @@
   command: /usr/bin/unzip -o /var/www/lighttpd/dvwa-$dvwa_version.zip -d /var/www/lighttpd/
 
 - name: delete the archive
-  command: /usr/bin/rm /var/www/lighttpd/dvwa-$dvwa_version.zip
+  file: path=/var/www/lighttpd/dvwa-$dvwa_version.zip
+        state=absent
 
 - name: set the permissions
   file: path=/var/www/lighttpd
@@ -42,5 +43,5 @@
 - name: restart lighttpd
   service: name=lighttpd state=restarted
 
-- name: remove unzip package
+- name: remove archiver package
   command: /usr/bin/dnf -y erase unzip
