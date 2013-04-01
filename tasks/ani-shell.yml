@@ -5,7 +5,7 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install archive tool
+- name: install archiver tool
   command: /usr/bin/dnf -y install unzip
 
 - name: create the directory
@@ -23,6 +23,13 @@
 - name: delete the archive
   file: path=/var/www/lighttpd/ani-shell-$ani_version.zip
         state=absent
+
+- name: remove unneeded files
+  file: path=/var/www/lighttpd/ani-shell/$item
+        state=absent
+  with_items:
+    - README.txt
+    - __MACOSX
 
 - name: reset the default user name
   lineinfile: dest=/var/www/lighttpd/ani-shell/Ani-Shell.php
@@ -47,5 +54,5 @@
               insertafter='        <!--SH-->'
               line='        <a href="/ani-shell/Ani-Shell.php" class="btn btn-primary">Ani-Shell</a>'
 
-- name: remove archive tool
+- name: remove archiver tool
   command: /usr/bin/dnf -y erase unzip
