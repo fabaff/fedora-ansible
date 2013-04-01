@@ -7,22 +7,22 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-  - name: update all packages
-    command: /usr/bin/dnf -y upgrade
-    tags: update
+- name: update all packages
+  command: /usr/bin/dnf -y upgrade
+  tags: update
 
-  - name: enable local cache
-    command: /usr/bin/dnf makecache
-    tags: make_cache
+- name: enable local cache
+  command: /usr/bin/dnf makecache
+  tags: make_cache
 
-  - name: install a package
-    command: /usr/bin/dnf -y install $add_pkg
-    tags: add_pkg
+- name: install a package
+  command: /usr/bin/dnf -y install $add_pkg
+  tags: add_pkg
 
-  - name: remove a package
-    command: /usr/bin/dnf -y erase $del_pkg
-    tags: del_pkg
+- name: remove a package
+  command: /usr/bin/dnf -y erase $del_pkg
+  tags: del_pkg
 
-  - name: clean package cache
-    command: /usr/bin/dnf clean all
-    tags: clean
+- name: clean package cache
+  command: /usr/bin/dnf clean all
+  tags: clean
