@@ -1,0 +1,35 @@
+# This playbook install the PHP Shell detector 
+# (https://github.com/emposha/PHP-Shell-Detector).
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: to use the git module later, git is needed
+  command: /usr/bin/dnf -y install git
+
+- name: delete a previous checkout
+  file: path=/var/www/lighttpd/php-shell-detector
+        state=absent
+
+- name: checkout from the git repo
+  git: repo=git://github.com/emposha/PHP-Shell-Detector.git
+       dest=/var/www/lighttpd/php-shell-detector
+
+- name: set the right permission
+  file: path=/var/www/lighttpd/
+        mode=0777
+        state=directory
+
+- name: add a new entry to the index.html page
+  lineinfile: dest=/var/www/lighttpd/index.html
+              regexp='^<!--IN-->'
+              insertafter='        <!--IN-->'
+              line='        <a href="/php-shell-detector/shelldetect.php" class="btn btn-primary">PHP Shell Detector</a>'
+
+- name: reset the username and the password
+  command: /usr/bin/sed -i 's|  private $authentication = array("username" => "admin", "password" => "protect");|  private $authentication = array("username" => "root", "password" => "$server_root_password");|g' /var/www/lighttpd/php-shell-detector/shelldetect.php
+
+- name: remove git
+  command: /usr/bin/dnf -y erase git
