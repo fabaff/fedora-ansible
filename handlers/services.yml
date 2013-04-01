@@ -28,3 +28,13 @@
 
 - name: restart lighttpd
   service: name=lighttpd state=restarted
+
+# Control handlers for mysql 
+- name: start mysql
+  service: name=mysqld state=started
+
+- name: stop mysql
+  service: name=mysqld state=stopped
+
+- name: restart mysql
+  service: name=mysqld state=restarted
