@@ -35,7 +35,8 @@
 #            backup=yes
 
 - name: remove lighttpd default file (images)
-  file: path=/var/www/lighttpd/$item state=absent
+  file: path=/var/www/lighttpd/$item
+        state=absent
   with_items:
     - light_logo.png
     - favicon.ico
