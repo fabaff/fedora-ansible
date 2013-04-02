@@ -9,7 +9,7 @@
 - name: install archiver package
   command: /usr/bin/dnf -y install unzip
 
-- name: downloads the bootstrap zip archive
+- name: download the bootstrap zip archive
   get_url: url=http://twitter.github.com/bootstrap/assets/bootstrap.zip
            dest=/var/www/lighttpd/bootstrap.zip
            mode=0440
