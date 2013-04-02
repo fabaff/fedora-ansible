@@ -44,7 +44,7 @@ At the moment the structure of the repository looks like this:
 ├── handlers -------- Handlers for Fedora services
 ├── maintenance ----- Complete playbooks
 ├── maintenance.yml - Regular tasks to perform on a running system
-├── modules --------- Modules especially for Alpine Linux
+├── modules --------- Modules especially for Fedora
 ├── README.md ------- This files
 ├── tasks ----------- A collection of tasks
 ├── setup.yml ------- Collected tasks for a fresh installed system
@@ -57,7 +57,6 @@ playbooks in this repository as a show case. Somethings doesn't make sense, are
 nasty hacks, or easier to do with another approach.
 
 ## Licensing
-
 Examples and modules should be licensed GPLv3 per the rest of Ansible, to
 encourage modules to graduate from contrib to core.
 
