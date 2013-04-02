@@ -1,4 +1,4 @@
-# This variables files contains the version numbers of the software packages
+# This variables file contains the version numbers of the software packages
 # which will be installed without the package management tool and basic release
 # number as helper variables for playbooks.
 #
