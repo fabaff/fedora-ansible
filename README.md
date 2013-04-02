@@ -12,6 +12,10 @@ If you have just found Ansible or Fedora, you should start here:
  * [Fedora](http://www.fedoraproject.org)
  * [Ansible project](https://github.com/ansible/ansible) -- see the examples directory
 
+A lot of playbooks in this repository are made and used with the 
+[Fedora Security Lab](https://fedorahosted.org/security-spin/) and the 
+[Fedora Security Lab Test bench](https://fedorahosted.org/security-spin/wiki/Test%20bench). 
+
 ## Prerequisites
 
 The setup of Ansible is explained in the on the [Ansible Getting Started](http://ansible.cc/docs/gettingstarted.html) page. Here is only the setup of the managed nodes covered. For every system you want to 
@@ -50,7 +54,7 @@ At the moment the structure of the repository looks like this:
 ## Warning
 **Think first** before you implement stuff from this repository. Consider the 
 playbooks in this repository as a show case. Somethings doesn't make sense, are
-nasty hacks, or easier to do with another approach. 
+nasty hacks, or easier to do with another approach.
 
 ## Licensing
 
