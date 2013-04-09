@@ -6,9 +6,6 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: to use the git module later, git is needed
-  command: /usr/bin/dnf -y install git
-
 - name: delete a previous checkout
   file: path=/var/www/lighttpd/php-shell-detector
         state=absent
@@ -30,6 +27,3 @@
 
 - name: reset the username and the password
   command: /usr/bin/sed -i 's|  private $authentication = array("username" => "admin", "password" => "protect");|  private $authentication = array("username" => "root", "password" => "$server_root_password");|g' /var/www/lighttpd/php-shell-detector/shelldetect.php
-
-- name: remove git
-  command: /usr/bin/dnf -y erase git

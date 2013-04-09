@@ -13,9 +13,6 @@
     - php-mbstring
     - php-gd
 
-- name: install archive tool
-  command: /usr/bin/dnf -y install tar
-
 - name: download the source tarball
   get_url: url=http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-$phpmyadmin_version-all-languages.tar.gz
            dest=/var/www/lighttpd/phpmyadmin-$phpmyadmin_version.tar.gz
@@ -44,6 +41,3 @@
 
 - name: restart lighttpd
   service: name=lighttpd state=restarted
-
-- name: remove archive tool
-  command: /usr/bin/dnf -y erase tar

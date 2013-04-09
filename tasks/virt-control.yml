@@ -1,0 +1,14 @@
+# This playbook install php-virt-control (http://www.php-virt-control.org).
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: delete a previous checkout
+  file: path=/var/www/lighttpd/virt-control
+        state=absent
+
+- name: checkout from the git repo
+  git: repo=git://git.php-virt-control.org/php-virt-control.git
+       dest=/var/www/lighttpd/virt-control
