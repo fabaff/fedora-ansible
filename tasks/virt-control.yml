@@ -5,10 +5,22 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: delete a previous checkout
-  file: path=/var/www/lighttpd/virt-control
-        state=absent
+- name: install php packages
+  command: /usr/bin/dnf -y install $item 
+  with_items:
+    - php-libvirt
+    - php-gd
+    - php-mysql
 
 - name: checkout from the git repo
   git: repo=git://git.php-virt-control.org/php-virt-control.git
        dest=/var/www/lighttpd/virt-control
+
+- name: enable default configuration
+  template: src=files/fastcgi.j2 
+            dest=/etc/lighttpd/conf.d/fastcgi.conf
+            owner=lighttpd
+            group=lighttpd
+            mode=0644
+
+
