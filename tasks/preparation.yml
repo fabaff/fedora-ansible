@@ -1,0 +1,18 @@
+# This playbook install all needed components for the setup. 
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: update all packages
+  command: /usr/bin/dnf -y upgrade
+
+- name: install the unzip package
+  command: /usr/bin/dnf -y install unzip
+
+- name: install the tar package
+  command: /usr/bin/dnf -y install tar
+
+- name: install the git package
+  command: /usr/bin/dnf -y install git
