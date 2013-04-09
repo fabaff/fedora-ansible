@@ -6,9 +6,6 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: to use the git module later, git is needed
-  command: /usr/bin/dnf -y install git
-
 - name: delete a previous checkout
   file: path=/var/www/lighttpd/sqlol
         state=absent
@@ -29,6 +26,3 @@
               regexp='^<!--VA-->'
               insertafter='        <!--VA-->'
               line='        <a href="/sqlol" class="btn btn-primary">SQLol</a>'
-
-- name: remove git
-  command: /usr/bin/dnf -y erase git

@@ -6,9 +6,6 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install archiver package
-  command: /usr/bin/dnf -y install unzip
-
 - name: download the bootstrap zip archive
   get_url: url=http://twitter.github.com/bootstrap/assets/bootstrap.zip
            dest=/var/www/lighttpd/bootstrap.zip
@@ -42,6 +39,3 @@
     - favicon.ico
     - light_button.png
     - poweredby.png
-
-- name: remove archiver package
-  command: /usr/bin/dnf -y erase unzip

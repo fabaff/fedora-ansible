@@ -6,9 +6,6 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install archiver package
-  command: /usr/bin/dnf -y install unzip
-
 - name: downloads the archive
   get_url: url=http://dvwa.googlecode.com/files/DVWA-$dvwa_version.zip
            dest=/var/www/lighttpd/dvwa-$dvwa_version.zip
@@ -42,6 +39,3 @@
 
 - name: restart lighttpd
   service: name=lighttpd state=restarted
-
-- name: remove archiver package
-  command: /usr/bin/dnf -y erase unzip

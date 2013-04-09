@@ -5,9 +5,6 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install archiver tool
-  command: /usr/bin/dnf -y install tar
-
 - name: download the source tarball
   get_url: url=http://prdownloads.sourceforge.net/phpshell/phpshell-$phpshell_version.tar.gz
            dest=/var/www/lighttpd/phpshell-$phpshell_version.tar.gz
@@ -33,6 +30,3 @@
               regexp='^<!--SH-->'
               insertafter='        <!--SH-->'
               line='        <a href="/phpshell/phpshell.php" class="btn btn-primary">PHPShell</a>'
-
-- name: remove archiver tool
-  command: /usr/bin/dnf -y erase tar

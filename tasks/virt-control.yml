@@ -1,0 +1,26 @@
+# This playbook install php-virt-control (http://www.php-virt-control.org).
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install php packages
+  command: /usr/bin/dnf -y install $item 
+  with_items:
+    - php-libvirt
+    - php-gd
+    - php-mysql
+
+- name: checkout from the git repo
+  git: repo=git://git.php-virt-control.org/php-virt-control.git
+       dest=/var/www/lighttpd/virt-control
+
+- name: enable default configuration
+  template: src=files/fastcgi.j2 
+            dest=/etc/lighttpd/conf.d/fastcgi.conf
+            owner=lighttpd
+            group=lighttpd
+            mode=0644
+
+
