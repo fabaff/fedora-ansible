@@ -1,0 +1,69 @@
+# This playbook creates a PXE server.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install needed packages
+  command: /usr/bin/dnf -y install $item 
+  with_items:
+    - tftp-server
+    - syslinux-tftpboot
+
+- name: copy prelinux.0
+  command: /usr/bin/cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/pxelinux.0
+
+- name: copy menu.c32  
+  command: /usr/bin/cp /usr/share/syslinux/menu.c32 /var/lib/tftpboot/menu.c32
+
+- name: create the pxelinux.cfg directory
+  file: path=/var/lib/tftpboot/pxelinux.cfg
+        mode=0755
+        state=directory
+
+- name: create the tmp directory for storing the configuration fragments
+  file: path=/var/lib/tftpboot/pxelinux.cfg/tmp
+        mode=0755
+        state=directory
+
+- name: put a configuration fragement for default part in place
+  template: src=files/pxe/000-default.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/000-default
+            mode=0644
+
+# PXE elements ###############################################################
+# 00x - Default
+- include: tasks/pxe/001-local.yml
+
+# 01x - 019 Tools
+- include: tasks/pxe/010-memtest.yml
+- include: tasks/pxe/011-dban.yml
+- include: tasks/pxe/012-hdt.yml
+
+# 02x - 09x Operating system
+- include: tasks/pxe/020-fedora.yml
+- include: tasks/pxe/030-freedos.yml
+
+# Finishing tasks #############################################################
+- name: assemble the default file
+  assemble: src=/var/lib/tftpboot/pxelinux.cfg/tmp
+            dest=/var/lib/tftpboot/pxelinux.cfg/default
+
+- name: delete the tmp directory
+  file: path=/var/lib/tftpboot/pxelinux.cfg/tmp
+        state=absent
+
+- name: configure firewall, allow http traffic
+  command: firewall-cmd --permanent --add-service=tftp
+
+- name: reload firewall configuration
+  command: firewall-cmd --reload
+
+#- name: set selinux
+#  command: setsebool -P tftpd_disable_trans=1
+
+- name: start and enable xinetd service
+  service: name=xinetd
+           state=running
+           enabled=yes

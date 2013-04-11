@@ -1,0 +1,21 @@
+# This playbook creates a PXE server entry for FreeDOS (http://www.freedos.org).
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: create the a directory for memtest
+  file: path=/var/lib/tftpboot/freedos
+        mode=0755
+        state=directory
+
+- name: download freedos image
+  get_url: url=http://ftp.gwdg.de/pub/misc/freedos/files/distributions/1.0/fdboot.img
+           dest=/var/lib/tftpboot/freedos/fdboot.img
+           mode=0440
+
+- name: put a configuration fragement for 'freedos' in place
+  template: src=files/pxe/030-freedos.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/030-freedos
+            mode=0644

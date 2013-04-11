@@ -1,0 +1,21 @@
+# This playbook creates a PXE server entry for DBAN (http://www.dban.org/).
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: create the a directory for dban
+  file: path=/var/lib/tftpboot/dban
+        mode=0755
+        state=directory
+
+- name: download dban iso image
+  get_url: url=http://downloads.sourceforge.net/project/dban/dban/dban-2.2.7/dban-2.2.7_i586.iso
+           dest=/var/lib/tftpboot/dban/ban-2.2.7_i586.iso
+           mode=0440
+
+- name: put a configuration fragement for 'dban' in place
+  template: src=files/pxe/011-dban.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/011-dban
+            mode=0644
