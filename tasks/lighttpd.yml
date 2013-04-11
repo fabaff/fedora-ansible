@@ -41,6 +41,9 @@
 - name: configure firewall, allow http traffic
   command: firewall-cmd --permanent --add-service=http
 
+- name: reload firewall configuration
+  command: firewall-cmd --reload
+
 - name: add some details to the default index.html file
   lineinfile: dest=/var/www/lighttpd/index.html
               regexp='^<body>'
