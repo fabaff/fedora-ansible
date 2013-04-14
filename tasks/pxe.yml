@@ -9,13 +9,16 @@
   command: /usr/bin/dnf -y install $item 
   with_items:
     - tftp-server
-    - syslinux-tftpboot
+    - syslinux
 
-- name: copy prelinux.0
+- name: copy prelinux.0 from syslinux installation
   command: /usr/bin/cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/pxelinux.0
 
-- name: copy menu.c32  
-  command: /usr/bin/cp /usr/share/syslinux/menu.c32 /var/lib/tftpboot/menu.c32
+- name: copy vesamenu.c32 from syslinux installation
+  command: /usr/bin/cp /usr/share/syslinux/vesamenu.c32 /var/lib/tftpboot/vesamenu.c32
+
+- name: copy memdisk from syslinux installation
+  command: /usr/bin/cp /usr/share/syslinux/memdisk /var/lib/tftpboot/memdisk
 
 - name: create the pxelinux.cfg directory
   file: path=/var/lib/tftpboot/pxelinux.cfg
@@ -27,24 +30,47 @@
         mode=0755
         state=directory
 
+- name: copy the background image for the menu
+  copy: src=files/pxe/background.png
+        dest=/var/lib/tftpboot/background.png
+
 - name: put a configuration fragement for default part in place
   template: src=files/pxe/000-default.j2
             dest=/var/lib/tftpboot/pxelinux.cfg/tmp/000-default
             mode=0644
 
 # PXE elements ###############################################################
-# 00x - Default
+# 001 - 009: Default local operations
 - include: tasks/pxe/001-local.yml
+- include: tasks/pxe/008-separator.yml
 
-# 01x - 019 Tools
-- include: tasks/pxe/010-memtest.yml
-- include: tasks/pxe/011-dban.yml
-- include: tasks/pxe/012-hdt.yml
+## No sub menu
+# 010 - 069: Operating system
+#- include: tasks/pxe/010-submenu-start.yml
+- include: tasks/pxe/011-fedora.yml
+#- include: tasks/pxe/012-fsl-tb.yml
+#- include: tasks/pxe/013-live.yml
+- include: tasks/pxe/019-rescue.yml
+- include: tasks/pxe/020-freedos.yml
+- include: tasks/pxe/030-sl.yml
+- include: tasks/pxe/040-debian.yml
+- include: tasks/pxe/050-xpud.yml
+#- include: tasks/pxe/060-alpine.yml
+#- include: tasks/pxe/069-submenu-end.yml
 
-# 02x - 09x Operating system
-- include: tasks/pxe/020-fedora.yml
-- include: tasks/pxe/030-freedos.yml
+## Sub menu
+# 070 - 089: Tools
+- include: tasks/pxe/070-submenu-start.yml
+- include: tasks/pxe/071-memtest.yml
+- include: tasks/pxe/072-dban.yml
+- include: tasks/pxe/073-hdt.yml
+- include: tasks/pxe/074-partedmagic.yml
+- include: tasks/pxe/089-submenu-end.yml
 
+# 090 - 099: Local operations
+- include: tasks/pxe/090-separator.yml
+- include: tasks/pxe/098-reboot.yml
+- include: tasks/pxe/099-shutdown.yml
 # Finishing tasks #############################################################
 - name: assemble the default file
   assemble: src=/var/lib/tftpboot/pxelinux.cfg/tmp
@@ -54,14 +80,19 @@
   file: path=/var/lib/tftpboot/pxelinux.cfg/tmp
         state=absent
 
+- name: set the permission
+  file: path=/var/lib/tftpboot/pxelinux.cfg/default
+        mode=0644
+        state=file
+
+- name: enable tftp in xinetd
+  command: sed -i 's|\sdisable\s\{3,\}= yes|\tdisable \t\t= no|g' /etc/xinetd.d/tftp
+
 - name: configure firewall, allow http traffic
   command: firewall-cmd --permanent --add-service=tftp
 
 - name: reload firewall configuration
   command: firewall-cmd --reload
-
-#- name: set selinux
-#  command: setsebool -P tftpd_disable_trans=1
 
 - name: start and enable xinetd service
   service: name=xinetd
