@@ -13,9 +13,9 @@
 - name: download hdt image
   get_url: url=http://hdt-project.org/raw-attachment/wiki/hdt-0.5.0/hdt-0.5.2.img
            dest=/var/lib/tftpboot/hdt/hdt-0.5.2.img
-           mode=0440
+           mode=0755
 
 - name: put a configuration fragement for 'hdt' in place
-  template: src=files/pxe/012-hdt.j2
-            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/012-hdt
+  template: src=files/pxe/073-hdt.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/073-hdt
             mode=0644

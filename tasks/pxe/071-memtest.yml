@@ -13,9 +13,9 @@
 - name: download memtest
   get_url: url=http://ftp-stud.hs-esslingen.de/pub/fedora/linux/releases/18/Fedora/x86_64/os/isolinux/memtest
            dest=/var/lib/tftpboot/memtest
-           mode=0440
+           mode=0755
 
 - name: put a configuration fragement for 'memtest' in place
-  template: src=files/pxe/010-memtest.j2
-            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/010-memtest
+  template: src=files/pxe/071-memtest.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/071-memtest
             mode=0644
