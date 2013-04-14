@@ -1,0 +1,5 @@
+# Partedmagic
+label pmagic
+menu label PartedMagic
+kernel partedmagic/bzImage64
+append noapic initrd=partedmagic/initrd.img root=/dev/ram0 init=/linuxrc ramdisk_size=100000

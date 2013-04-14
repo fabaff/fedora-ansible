@@ -1,0 +1,44 @@
+# This playbook creates a PXE server entry for PartedMagic (http://partedmagic.com).
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install the unzip package
+  command: /usr/bin/dnf -y install unzip
+
+- name: create the a directory for partedmagic
+  file: path=/var/lib/tftpboot/partedmagic
+        mode=0755
+        state=directory
+
+- name: download partedmagic image
+  get_url: url=https://sourceforge.net/projects/partedmagic/files/partedmagic/Parted%20Magic%202013_02_28/pmagic_pxe_2013_02_28.zip
+           dest=/var/lib/tftpboot/partedmagic/pmagic_pxe_2013_02_28.zip
+           mode=0755
+
+- name: unpack the archive
+  command: /usr/bin/unzip -o /var/lib/tftpboot/partedmagic/pmagic_pxe_2013_02_28.zip -d /var/lib/tftpboot/partedmagic/
+
+- name: move image
+  command: /usr/bin/mv /var/lib/tftpboot/partedmagic/pmagic_pxe_2013_02_28/pmagic/bzImage64 /var/lib/tftpboot/partedmagic/bzImage64
+
+- name: move initrf
+  command: /usr/bin/mv /var/lib/tftpboot/partedmagic/pmagic_pxe_2013_02_28/pmagic/initrd.img /var/lib/tftpboot/partedmagic/initrd.img
+
+- name: delete the archive
+  file: path=/var/lib/tftpboot/partedmagic/pmagic_pxe_2013_02_28.zip
+        state=absent
+
+- name: delete the directory
+  file: path=/var/lib/tftpboot/partedmagic/pmagic_pxe_2013_02_28
+        state=absent
+
+- name: put a configuration fragement for 'partedmagic' in place
+  template: src=files/pxe/074-partedmagic.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/074-partedmagic
+            mode=0644
+
+- name: remove the unzip package
+  command: /usr/bin/dnf -y erase unzip
