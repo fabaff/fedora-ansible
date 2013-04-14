@@ -1,0 +1,34 @@
+# This playbook creates a PXE server entry for a Fedora Live system.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install the livecd-tools package
+  command: /usr/bin/dnf -y install livecd-tools
+
+- name: create the a directory for fedora
+  file: path=/var/lib/tftpboot/fedora-live
+        mode=0755
+        state=directory
+
+- name: download fedora $fedora_current live iso 
+  get_url: url=http://download.fedoraproject.org/pub/fedora/linux/releases/$fedora_current/Live/x86_64/Fedora-$fedora_current-x86_64-Live-Desktop.iso
+           dest=/var/lib/tftpboot/fedora-live/Fedora-$fedora_current-x86_64-Live-Desktop.iso
+           mode=0644
+
+- name: extract the needed files
+  command: /usr/bin/livecd-iso-to-pxeboot /var/lib/tftpboot/fedora-live/Fedora-$fedora_current-x86_64-Live-Desktop.iso
+
+#- name: delete the iso image
+#  file: path=/var/lib/tftpboot/fedora-live/Fedora-$fedora_current-x86_64-Live-Desktop.iso
+#        state=absent
+
+- name: put a configuration fragement for 'fedora rescue' in place
+  template: src=files/pxe/013-live.j2 
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/013-live
+            mode=0644
+
+- name: remove livecd-tools package
+  command: /usr/bin/dnf -y erase livecd-tools

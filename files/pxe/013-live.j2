@@ -1,0 +1,5 @@
+# Start Fedora Live system
+label f-live
+menu label Fedora {{ fedora_current }} Live system
+kernel fedora-live/vmlinuz0
+append rootflags=loop initrd=fedora-livelive/initrd0.img root=live:/Fedora-18-Beta-x86_64-Live-Desktop.iso rootfstype=auto ro liveimg quiet rhgb rd.luks=0 rd.md=0 rd.dm=0
