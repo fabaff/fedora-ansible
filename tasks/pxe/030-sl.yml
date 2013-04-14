@@ -1,0 +1,26 @@
+# This playbook creates a PXE server entry for Scientific Linux installations.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: create the a directory for sl
+  file: path=/var/lib/tftpboot/sl
+        mode=0755
+        state=directory
+
+- name: download vmlinuz
+  get_url: url=ftp://ftp-stud.hs-esslingen.de/pub/Mirrors/scientific/6rolling/x86_64/os/isolinux/vmlinuz
+           dest=/var/lib/tftpboot/sl/vmlinuz
+           mode=0644
+
+- name: download initrd
+  get_url: url=ftp://ftp-stud.hs-esslingen.de/pub/Mirrors/scientific/6rolling/x86_64/os/isolinux/initrd.img
+           dest=/var/lib/tftpboot/sl/initrd.img
+           mode=0644
+
+- name: put a configuration fragement for 'scientific linux' in place
+  template: src=files/pxe/030-sl.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/030-sl
+            mode=0644
