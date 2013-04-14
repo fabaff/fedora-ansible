@@ -1,4 +1,4 @@
-# This playbook creates a PXE server entry for Fedora installation.
+# This playbook creates a PXE server entry for Fedora installations.
 #
 # Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
 #
@@ -13,14 +13,14 @@
 - name: download vmlinuz
   get_url: url=http://ftp-stud.hs-esslingen.de/pub/fedora/linux/releases/$fedora_current/Fedora/x86_64/os/images/pxeboot/vmlinuz
            dest=/var/lib/tftpboot/fedora/vmlinuz-f$fedora_current
-           mode=0440
+           mode=0644
 
 - name: download initrd
   get_url: url=http://ftp-stud.hs-esslingen.de/pub/fedora/linux/releases/$fedora_current/Fedora/x86_64/os/images/pxeboot/initrd.img
-           dest=/var/lib/tftpboot/fedora/initrd-f$fedora_current
-           mode=0440
+           dest=/var/lib/tftpboot/fedora/initrd-f$fedora_current.img
+           mode=0644
 
 - name: put a configuration fragement for 'fedora' in place
-  template: src=files/pxe/020-fedora.j2 
-            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/020-fedora
+  template: src=files/pxe/011-fedora.j2 
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/011-fedora
             mode=0644

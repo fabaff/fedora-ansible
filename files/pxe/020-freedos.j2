@@ -1,6 +1,9 @@
 # FreeDOS
 label live-fd
 menu label FreeDOS Live system
-linux memdisk
-initrd freedos/fdboot.img
-#
+kernel memdisk
+append initrd=freedos/fdboot.img
+# Only needed when the iso image is used 
+#linux memdisk
+#initrd freedos/freedos.iso
+#append iso

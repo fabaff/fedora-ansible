@@ -1,6 +1,5 @@
-# Launch installation of Fedora {{ fedora_current }}
+# Installation of Fedora {{ fedora_current }}
 label install-f{{ fedora_current }}
-menu label Launch installation of Fedora {{ fedora_current }}
+menu label Fedora {{ fedora_current }} installation
 kernel fedora/vmlinuz-f{{ fedora_current }}
 append initrd=fedora/initrd-f{{ fedora_current }}.img repo=http://mirror2.hs-esslingen.de/fedora/linux/releases/{{ fedora_current }}/Fedora/x86_64/os/
-#

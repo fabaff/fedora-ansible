@@ -5,7 +5,7 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: create the a directory for memtest
+- name: create the a directory for freedos
   file: path=/var/lib/tftpboot/freedos
         mode=0755
         state=directory
@@ -13,9 +13,14 @@
 - name: download freedos image
   get_url: url=http://ftp.gwdg.de/pub/misc/freedos/files/distributions/1.0/fdboot.img
            dest=/var/lib/tftpboot/freedos/fdboot.img
-           mode=0440
+           mode=0755
+
+#- name: download the freedos iso image
+#  get_url: url=http://www.freedos.org/download/download/fd11src.iso
+#           dest=/var/lib/tftpboot/freedos/freedos.iso
+#           mode=0755
 
 - name: put a configuration fragement for 'freedos' in place
-  template: src=files/pxe/030-freedos.j2
-            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/030-freedos
+  template: src=files/pxe/020-freedos.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/020-freedos
             mode=0644
