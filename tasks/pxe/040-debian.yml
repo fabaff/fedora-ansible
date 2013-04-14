@@ -1,0 +1,46 @@
+# This playbook creates a PXE server entry for Debian installations.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install the tar package
+  command: /usr/bin/dnf -y install tar
+
+- name: create the a directory for debian
+  file: path=/var/lib/tftpboot/debian
+        mode=0755
+        state=directory
+
+- name: download vmlinuz
+  get_url: url=http://ftp.nl.debian.org/debian/dists/squeeze/main/installer-amd64/current/images/netboot/netboot.tar.gz
+           dest=/var/lib/tftpboot/debian/netboot.tar.gz
+           mode=0644
+
+- name: unpack the source tarball
+  command: /usr/bin/tar -xzf /var/lib/tftpboot/debian/netboot.tar.gz -C /var/lib/tftpboot/debian/
+
+- name: move image
+  command: /usr/bin/mv /var/lib/tftpboot/debian/debian-installer/amd64/linux /var/lib/tftpboot/debian/linux
+
+- name: move initrd
+  command: /usr/bin/mv /var/lib/tftpboot/debian/debian-installer/amd64/initrd.gz /var/lib/tftpboot/debian/initrd.gz
+
+- name: delete files
+  file: path=/var/lib/tftpboot/debian/$item
+        state=absent
+  with_items:
+    - debian-installer
+    - pxelinux.0
+    - version.info
+    - netboot.tar.gz
+    - pxelinux.cfg
+
+- name: put a configuration fragement for 'debian' in place
+  template: src=files/pxe/040-debian.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/040-debian
+            mode=0644
+
+- name: remove the tar package
+  command: /usr/bin/dnf -y erase tar
