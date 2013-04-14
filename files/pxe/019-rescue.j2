@@ -1,0 +1,5 @@
+# Start Fedora Rescue system
+label rescue
+menu label Fedora {{ fedora_current }} Rescue system
+kernel fedora/vmlinuz-f{{ fedora_current }}
+append initrd=fedora/initrd-f{{ fedora_current }}.img rescue lang=de_CH keyboard=sg-latin1-nodeadkeys rd.luks=0 rd.md=0 rd.dm=0
