@@ -1,0 +1,14 @@
+# This playbook creates a PXE server entry for shutdown.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: copy menu.c32
+  command: /usr/bin/cp /usr/share/syslinux/poweroff.com /var/lib/tftpboot/poweroff.com
+
+- name: put a configuration fragement for 'shutdown' in place
+  template: src=files/pxe/099-shutdown.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/099-shutdown
+            mode=0644
