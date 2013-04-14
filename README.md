@@ -15,12 +15,17 @@ If you have just found Ansible or Fedora, you should start here:
 A lot of playbooks in this repository are made and used with the 
 [Fedora Security Lab](https://fedorahosted.org/security-spin/) and the 
 [Fedora Security Lab Test bench](https://fedorahosted.org/security-spin/wiki/Test%20bench). 
+For all security-related playbooks please check the 
+[Fedora Security Lab Test bench](https://github.com/fabaff/fsl-test-bench) git
+repository .
 
 ## Prerequisites
 
-The setup of Ansible is explained in the on the [Ansible Getting Started](http://ansible.cc/docs/gettingstarted.html) page. Here is only the setup of the managed nodes covered. For every system you want to 
-manage, you need to have the client's SSH key in the *authorized_keys* file of
-the management system and Python.
+The setup of Ansible is explained in the on the 
+[Ansible Getting Started](http://ansible.cc/docs/gettingstarted.html) page. 
+Here is only the setup of the managed nodes covered. For every system you want
+to manage, you need to have the client's SSH key in the *authorized_keys* file
+of the management system and Python.
 
 Make sure that [Python](http://www.python.org/) is installed. If not, install
 the Python package.
