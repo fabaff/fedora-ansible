@@ -1,0 +1,9 @@
+# Alpine Linux
+label live-al
+menu label Alpine Linux system
+kernel alpine/grsec
+append initrd=alpine/grsec.gz alpine_dev=usbdisk:vfat modules=loop,squashfs,sd-mod,usb-storage quiet
+# Using iso image doesn't work
+#linux memdisk
+#initrd alpine/alpine-mini-2.5.4-x86_64.iso
+#append iso

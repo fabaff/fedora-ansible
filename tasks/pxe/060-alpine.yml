@@ -1,0 +1,38 @@
+# This playbook creates a PXE server entry for Alpine Linux.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: create the a directory for alpine
+  file: path=/var/lib/tftpboot/alpine
+        mode=0755
+        state=directory
+
+- name: download the alpine iso image
+  get_url: url=http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v2.5/releases/x86_64/alpine-mini-2.5.4-x86_64.iso
+           dest=/var/lib/tftpboot/alpine/alpine-mini-2.5.4-x86_64.iso
+           mode=0755
+
+- name: create the a directory for alpine
+  file: path=/var/lib/tftpboot/alpine/iso
+        mode=0755
+        state=directory
+
+- name: mount iso image
+  command: /usr/bin/mount -o loop /var/lib/tftpboot/alpine/alpine-mini-2.5.4-x86_64.iso /var/lib/tftpboot/alpine/iso
+
+- name: copy the needed files from the mounted iso
+  command: /usr/bin/cp /var/lib/tftpboot/alpine/iso/boot/$item /var/lib/tftpboot/alpine/$item
+  with_items:
+    - grsec
+    - grsec.gz
+
+- name: unmount iso image
+  command: /usr/bin/umount /var/lib/tftpboot/alpine/iso
+
+- name: put a configuration fragement for 'alpine' in place
+  template: src=files/pxe/060-alpine.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/060-alpine
+            mode=0644
