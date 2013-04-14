@@ -1,0 +1,5 @@
+# Installation of Fedora Security Lab Test bench
+label install-fsl-tb
+menu label Fedora {{ fedora_current }} Security Test bench installation
+kernel fedora/vmlinuz-f{{ fedora_current }}
+append initrd=fedora/initrd-f{{ fedora_current }}.img ramdisk_size=15491 ip=dhcp ksdevice=bootif ks=http://192.168.0.1/kickstart/fsl.ks
