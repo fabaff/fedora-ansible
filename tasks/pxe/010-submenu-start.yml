@@ -1,0 +1,11 @@
+# This playbook creates a PXE server entry for 'menu begin'.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: put a configuration fragement for 'menu begin' in place
+  template: src=files/pxe/010-submenu-start.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/010-submenu-start
+            mode=0644
