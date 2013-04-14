@@ -1,0 +1,14 @@
+# This playbook creates a PXE server entry for a system reboot.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: copy reboot.c32
+  command: /usr/bin/cp /usr/share/syslinux/reboot.c32 /var/lib/tftpboot/reboot.c32
+
+- name: put a configuration fragement for 'reboot' in place
+  template: src=files/pxe/098-reboot.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/098-reboot
+            mode=0644
