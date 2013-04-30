@@ -5,13 +5,14 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install the lighttpd web server and related packages
+- name: install lighttpd and related packages
   yum: pkg=$item
-       state=present
+       state=present 
   with_items:
     - lighttpd
     - lighttpd-fastcgi
     - php-cli
+    - net-tools
 
 - name: enable fastcgi support in modules.conf
   lineinfile: dest=/etc/lighttpd/modules.conf
@@ -26,22 +27,24 @@
             owner=lighttpd
             group=lighttpd
             mode=0644
-  notify:
-    - start lighttpd
 
-- name: enable lighttpd on boot
-  command: systemctl enable lighttpd.service
-# Why is this not working?
-#  service: name=lighttpd enabled=yes
-#  service: name=lighttpd.service enabled=yes
-# -> msg: service name not recognized
-# Seems to be a bug
+- name: create directory for the socket
+  file: path=/var/run/lighttpd
+        state=directory
+        mode=0775
+        owner=lighttpd
+        group=lighttpd
+
+- name: start lighttpd
+  service: name=lighttpd
+           state=running
+           enabled=yes 
 
 - name: configure firewall, allow http traffic
-  command: firewall-cmd --permanent --add-service=http
+  command: /usr/bin/firewall-cmd --permanent --add-port=80/tcp
 
 - name: reload firewall configuration
-  command: firewall-cmd --reload
+  command: /usr/bin/firewall-cmd --reload
 
 - name: add some details to the default index.html file
   lineinfile: dest=/var/www/lighttpd/index.html
