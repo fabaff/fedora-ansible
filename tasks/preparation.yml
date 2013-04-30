@@ -6,13 +6,12 @@
 #
 ---
 - name: update all packages
-  command: /usr/bin/dnf -y upgrade
+  command: /usr/bin/yum -y update
 
-- name: install the unzip package
-  command: /usr/bin/dnf -y install unzip
-
-- name: install the tar package
-  command: /usr/bin/dnf -y install tar
-
-- name: install the git package
-  command: /usr/bin/dnf -y install git
+- name: install additional packages
+  yum: pkg=$item
+       state=present
+  with_items:
+    - unzip
+    - tar
+    - git
