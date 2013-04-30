@@ -18,18 +18,12 @@
   file: path=/var/www/lighttpd/bootstrap.zip
         state=absent
 
-- name: set the right permission
-  file: path=/var/www/lighttpd/
-        mode=0777
-        state=directory
-
 - name: install a default index.html file
   template: src=files/bootstrap.j2
             dest=/var/www/lighttpd/index.html 
             owner=root
             group=root
             mode=0755
-#            backup=yes
 
 - name: remove lighttpd default file (images)
   file: path=/var/www/lighttpd/$item
