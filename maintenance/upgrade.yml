@@ -10,7 +10,7 @@
 
   tasks:
   - name: upgrade all packages
-    command: /usr/bin/dnf -y upgrade
+    command: /usr/bin/yum -y upgrade
 
   - name: reboot system
     command: /usr/sbin/reboot
