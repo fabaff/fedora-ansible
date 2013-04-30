@@ -1,10 +1,20 @@
-[fedora]
-name=Fedora $releasever - $basearch
+[x86_64]
+name=Fedora $releasever - x86_64
 failovermethod=priority
-baseurl=http://mirror.switch.ch/ftp/mirror/fedora/linux/releases/$releasever/Everything/$basearch/os/
-#baseurl=http://download.fedoraproject.org/pub/fedora/linux/releases/$releasever/Everything/$basearch/os/
-#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
+baseurl=http://mirror.switch.ch/ftp/mirror/fedora/linux/releases/$releasever/Everything/x86_64/os/
 enabled=0
 #metadata_expire=7d
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$basearch
+
+#[x86_64]
+#name=Fedora $releasever - $basearch
+#failovermethod=priority
+#baseurl=http://mirror.switch.ch/ftp/mirror/fedora/linux/releases/$releasever/Everything/$basearch/os/
+#enabled=0
+#metadata_expire=7d
+#gpgcheck=1
+#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$basearch
+
+# Mirror list
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
