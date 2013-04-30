@@ -7,7 +7,7 @@
 ---
 - name: install needed packages
   yum: pkg=$item
-       state=absent
+       state=present
   with_items:
     - tftp-server
     - syslinux
