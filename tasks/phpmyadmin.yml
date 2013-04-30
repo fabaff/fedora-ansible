@@ -39,6 +39,3 @@
               regexp='^<!--IN-->'
               insertafter='        <!--IN-->'
               line='        <a href="/phpmyadmin" class="btn btn-primary">phpMyAdmin</a>'
-
-- name: restart lighttpd
-  service: name=lighttpd state=restarted
