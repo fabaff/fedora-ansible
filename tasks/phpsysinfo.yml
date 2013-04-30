@@ -31,11 +31,6 @@
 - name: copy the default config file
   command: /usr/bin/cp /var/www/lighttpd/phpsysinfo/phpsysinfo.ini.new /var/www/lighttpd/phpsysinfo/phpsysinfo.ini
 
-- name: set the permissions
-  file: path=/var/www/lighttpd
-        mode=0777
-        state=directory
-
 - name: add a new entry to the index.html page
   lineinfile: dest=/var/www/lighttpd/index.html
               regexp='^<!--IN-->'
