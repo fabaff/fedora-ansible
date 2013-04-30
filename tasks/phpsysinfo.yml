@@ -41,6 +41,3 @@
               regexp='^<!--IN-->'
               insertafter='        <!--IN-->'
               line='        <a href="/phpsysinfo" class="btn btn-primary">phpSysInfo</a>'
-
-- name: restart lighttpd
-  service: name=lighttpd state=restarted
