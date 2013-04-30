@@ -7,7 +7,8 @@
 # Based on a playbook by https://github.com/fourkitchens/server-playbooks
 ---
 - name: install mysql and related packages
-  command: /usr/bin/dnf -y install $item 
+  yum: pkg=$item
+       state=present
   with_items:
     - mysql
     - mysql-server
@@ -16,7 +17,8 @@
     - php-pear
 
 #- name: start mysql
-#  service: name=mysqld state=started
+#  service: name=mysqld
+            state=started
 
 - name: set the mysql root password
   mysql_user: user=root
