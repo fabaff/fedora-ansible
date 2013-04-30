@@ -29,11 +29,6 @@
   file: path=/var/www/lighttpd/phpmyadmin-$phpmyadmin_version.tar.gz
         state=absent
 
-- name: set the permissions
-  file: path=/var/www/lighttpd/
-        mode=0777
-        state=directory
-
 - name: add a new entry to the index.html page
   lineinfile: dest=/var/www/lighttpd/index.html
               regexp='^<!--IN-->'
