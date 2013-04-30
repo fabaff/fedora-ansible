@@ -6,9 +6,6 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install archiver tool
-  command: /usr/bin/dnf -y install tar
-
 - name: download the source tarball
   get_url: url=http://sourceforge.net/projects/linfo/files/Linfo%20Stable%20Releases/linfo-$linfo_version.tar.gz
            dest=/var/www/lighttpd/linfo-$linfo_version.tar.gz
@@ -39,7 +36,5 @@
               line='        <a href="/linfo" class="btn btn-primary">linfo</a>'
 
 - name: restart lighttpd
-  service: name=lighttpd state=restarted
-
-- name: remove archiver tool
-  command: /usr/bin/dnf -y erase tar
+  service: name=lighttpd
+           state=restarted
