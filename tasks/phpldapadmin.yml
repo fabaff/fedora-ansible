@@ -1,0 +1,40 @@
+# This playbook install phpldapadmin (http://phpldapadmin.sourceforge.net).
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install needed packages
+  yum: pkg=$item
+       state=present
+  with_items:
+    - php-ldap
+
+- name: download the source tarball
+  get_url: url=http://downloads.sourceforge.net/project/phpldapadmin/phpldapadmin-php5/1.2.3/phpldapadmin-1.2.3.tgz
+           dest=/var/www/lighttpd/phpldapadmin-1.2.3.tgz
+           mode=0440
+
+- name: unpack the source tarball
+  command: /usr/bin/tar -xzf /var/www/lighttpd/phpldapadmin-1.2.3.tgz -C /var/www/lighttpd/
+
+- name: rename the source directory
+  command: /usr/bin/mv /var/www/lighttpd/phpldapadmin-1.2.3 /var/www/lighttpd/phpldapadmin
+
+- name: delete the archive
+  file: path=/var/www/lighttpd/phpldapadmin-1.2.3.tgz
+        state=absent
+
+- name: put config file in place
+  template: src=files/phpldapadmin-config.j2 
+            dest=/var/www/lighttpd/phpldapadmin/config/config.php
+            owner=lighttpd
+            group=lighttpd
+            mode=0644
+
+#- name: add a new entry to the index.html page
+#  lineinfile: dest=/var/www/lighttpd/index.html
+#              regexp='^<!--IN-->'
+#              insertafter='        <!--IN-->'
+#              line='        <a href="/phpldapadmin" class="btn btn-primary">phpLDAPadmin</a>'
