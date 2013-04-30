@@ -29,7 +29,3 @@
               regexp='^<!--IN-->'
               insertafter='        <!--IN-->'
               line='        <a href="/linfo" class="btn btn-primary">linfo</a>'
-
-- name: restart lighttpd
-  service: name=lighttpd
-           state=restarted
