@@ -5,12 +5,11 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install the lighttpd web server
-  command: /usr/bin/dnf -y install lighttpd
-
-- name: install php packages
-  command: /usr/bin/dnf -y install $item 
+- name: install the lighttpd web server and related packages
+  yum: pkg=$item
+       state=present
   with_items:
+    - lighttpd
     - lighttpd-fastcgi
     - php-cli
 
