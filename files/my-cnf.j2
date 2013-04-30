@@ -1,4 +1,4 @@
-# Default my.cnf file for Ansible playbook
+# Default my.cnf file for MySQL. Distributed by Ansible.
 [client]
 user=root
-password=password
+password={{ mysql_root_password }}
