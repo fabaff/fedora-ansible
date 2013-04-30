@@ -1,4 +1,4 @@
-[fedora-mirror]
+[fedora]
 name=Fedora $releasever - $basearch
 failovermethod=priority
 baseurl=http://mirror.switch.ch/ftp/mirror/fedora/linux/releases/$releasever/Everything/$basearch/os/
