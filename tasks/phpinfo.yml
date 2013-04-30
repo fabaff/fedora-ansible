@@ -26,13 +26,8 @@
               line='<?php\nphpinfo();\n?>'
               state=present
 
-- name: set the permissions
-  file: path=/var/www/lighttpd/
-        mode=0777
-        state=directory
-
-- name: add a new entry to the index.html page
-  lineinfile: dest=/var/www/lighttpd/index.html
-              regexp='^<!--IN-->'
-              insertafter='        <!--IN-->'
-              line='        <a href="/phpinfo" class="btn btn-primary">phpInfo</a>'
+#- name: add a new entry to the index.html page
+#  lineinfile: dest=/var/www/lighttpd/index.html
+#              regexp='^<!--IN-->'
+#              insertafter='        <!--IN-->'
+#              line='        <a href="/phpinfo" class="btn btn-primary">phpInfo</a>'
