@@ -12,12 +12,13 @@
   user: root
   vars_files:
     - variables/application-versions.yml
-    - variables/sensitive-variables.yml
+    - variables/sensitive.yml
 
   tasks:
     - include: tasks/motd.yml
 #    - include: tasks/rpmfusion.yml
 #    - include: tasks/sshd.yml
+    - include: tasks/pxe.yml
 
   handlers:
    - include: handlers/system.yml
