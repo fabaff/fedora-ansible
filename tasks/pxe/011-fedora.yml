@@ -21,6 +21,6 @@
            mode=0644
 
 - name: put a configuration fragement for 'fedora' in place
-  template: src=files/pxe/011-fedora.j2 
+  template: src=files/pxe/011-fedora.j2
             dest=/var/lib/tftpboot/pxelinux.cfg/tmp/011-fedora
             mode=0644
