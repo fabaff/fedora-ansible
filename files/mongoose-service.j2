@@ -1,0 +1,15 @@
+[Unit]
+Description=The mongoose Web server
+After=network.target
+
+[Service]
+Type=simple
+User=nobody
+Group=nobody
+Restart=always
+ExecStart=/usr/bin/mongoose -p 8889 -r /var/www/mongoose
+StandardOutput=syslog
+SyslogIdentifier=mongoose
+
+[Install]
+WantedBy=multi-user.target
