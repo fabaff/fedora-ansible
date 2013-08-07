@@ -7,7 +7,7 @@
 #
 ---
 - name: download the bootstrap zip archive
-  get_url: url=http://twitter.github.com/bootstrap/assets/bootstrap.zip
+  get_url: url=http://getbootstrap.com/bs-v3.0.0-rc1-dist.zip
            dest=/var/www/lighttpd/bootstrap.zip
            mode=0440
 
@@ -20,7 +20,7 @@
 
 - name: install a default index.html file
   template: src=files/bootstrap.j2
-            dest=/var/www/lighttpd/index.html 
+            dest=/var/www/lighttpd/index.html
             owner=root
             group=root
             mode=0755
