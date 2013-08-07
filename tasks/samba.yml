@@ -1,0 +1,59 @@
+# This playbook install the samba (http://www.samba.org/) server.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install samba and related packages
+  yum: pkg=$item
+       state=present 
+  with_items:
+    - cups-libs
+    - samba
+    - samba-common
+    - samba-client
+
+- name: create a directory to share
+  file: path=/opt/samba/
+        mode=0755
+        state=directory
+
+- name: put a dummy file in the share
+  template: src=files/default.j2
+            dest=/opt/samba/info.txt
+            mode=0644
+
+- name: set selinux boolean
+  command: /usr/sbin/setsebool -P allow_smbd_anon_write=1
+
+- name: allow full access (r/w)
+  command: /usr/sbin/setsebool -P samba_export_all_rw on
+
+- name: set selinux context
+  command: /usr/bin/chcon -t samba_share_t /opt/samba/
+
+- name: add a share
+  lineinfile: dest=/etc/samba/smb.conf
+              regexp=''
+              insertafter=EOF
+              line='[samba]\n\tpath = /opt/samba/\n\tread only = no\n;\tbrowseable = yes\n'
+
+- name: configure firewall, allow samba traffic
+  command: /usr/bin/firewall-cmd --permanent --add-service=samba
+
+- name: configure firewall, allow samba traffic
+  command: /usr/bin/firewall-cmd --permanent --add-service=samba-client
+
+- name: reload firewall configuration
+  command: /usr/bin/firewall-cmd --reload
+
+- name: start samba
+  service: name=smb
+           state=running
+           enabled=yes
+
+- name: start named
+  service: name=nmb
+           state=running
+           enabled=yes
