@@ -1,0 +1,20 @@
+# This playbook enable automatic package updates.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install the needed packages
+  yum: pkg=$item
+       state=present
+  with_items:
+    - yum-cron
+
+- name: start yum-cron
+  service: name=yum-cron
+           state=running
+           enabled=yes
+
+# Check if the service is running
+# $ sudo systemctl status yum-cron.service
