@@ -1,0 +1,11 @@
+[Unit]
+Description=A simple script that send MQTT messages
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/python /usr/bin/mqtt_pub.py
+
+[Install]
+WantedBy=multi-user.target
