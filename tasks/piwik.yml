@@ -1,0 +1,47 @@
+# This playbook install piwik (http://piwik.org/).
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install needed php packages
+  yum: pkg=$item
+       state=present
+  with_items:
+    - php-mysql
+    - mysql
+    - php-zlib
+    - php-pdo_mysql
+
+- name: download the source tarball
+  get_url: url=http://piwik.org/latest.zip
+           dest=/var/www/lighttpd/latest.zip
+           mode=0440
+
+- name: unpack the archive
+  command: /usr/bin/unzip -o /var/www/lighttpd/latest.zip -d /var/www/lighttpd/
+
+- name: delete the archive
+  file: path=/var/www/lighttpd/latest.zip
+        state=absent
+
+#- name: change ownership of directory
+#  command: /bin/chown -R lighttpd:lighttpd /var/www/lighttpd/piwik
+
+- name: create directories for piwik
+  file: path=/var/www/lighttpd/piwik/tmp/$item
+        owner=lighttpd
+        group=lighttpd
+        mode=0755
+        state=directory
+  with_items:
+    - templates_c
+    - cache
+    - assets
+    - tcpdf
+
+- name: delete readme file
+  file: path=/var/www/lighttpd/How\ to\ install\ Piwik.html
+        state=absent
+
