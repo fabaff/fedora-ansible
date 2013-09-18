@@ -1,0 +1,39 @@
+# This playbook creates a PXE server entry for Kali Linux.
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: create the a directory for Kali Linux
+  file: path=/var/lib/tftpboot/kali
+        mode=0755
+        state=directory
+
+- name: download netboot
+  get_url: url=http://repo.kali.org/kali/dists/kali/main/installer-amd64/current/images/netboot/netboot.tar.gz
+           dest=/var/lib/tftpboot/kali/netboot.tar.gz
+           mode=0644
+
+- name: unpack the source tarball
+  command: /usr/bin/tar -xzf /var/lib/tftpboot/kali/netboot.tar.gz -C /var/lib/tftpboot/kali/
+
+- name: move the needed file into the right place
+  command: /usr/bin/mv var/lib/tftpboot/kali/debian-installer/amd64/linux var/lib/tftpboot/kali/linux
+
+- name: move the needed file into the right place
+  command: /usr/bin/mv var/lib/tftpboot/kali/debian-installer/amd64/initrd.gz var/lib/tftpboot/kali/initrd.gz
+
+- name: delete the archive
+  file: path=/var/lib/tftpboot/kali/netboot.tar.gz
+        state=absent
+
+- name: put a configuration fragement for 'kali' in place
+  template: src=files/pxe/070-kali.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/070-kali
+            mode=0644
+
+- name: put a configuration fragement for 'kali' in place
+  template: src=files/pxe/070-kali.j2
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/070-kali
+            mode=0644
