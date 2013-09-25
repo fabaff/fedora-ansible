@@ -13,7 +13,7 @@ fedora_current: 19
 fedora_next: 20
 
 # linfo - http://linfo.sourceforge.net/
-linfo_version: 1.8.1
+linfo_version: 1.9
 
 # piwik - http://piwik.org/
 piwik_version: 1.11.1
