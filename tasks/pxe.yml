@@ -57,6 +57,7 @@
 - include: tasks/pxe/040-debian.yml
 - include: tasks/pxe/050-xpud.yml
 #- include: tasks/pxe/060-alpine.yml
+- include: tasks/pxe/070-kali.yml
 #- include: tasks/pxe/069-submenu-end.yml
 
 ## Sub menu

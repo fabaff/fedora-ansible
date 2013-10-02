@@ -1,5 +1,5 @@
 # This playbook contains operations to perform package management tasks on
-# Fedora hosts. dnf is used as the package maintanance tool  
+# Fedora hosts. dnf is used as the package maintanance tool
 # (http://fedoraproject.org/wiki/Features/DNF).
 #
 # Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>

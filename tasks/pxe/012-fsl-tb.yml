@@ -21,6 +21,6 @@
            mode=0664
 
 - name: put a configuration fragement for 'fsl test bench' in place
-  template: src=files/pxe/012-fsl-tb.j2 
+  template: src=files/pxe/012-fsl-tb.j2
             dest=/var/lib/tftpboot/pxelinux.cfg/tmp/012-fsl-tb
             mode=0644

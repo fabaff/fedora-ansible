@@ -13,7 +13,7 @@
         mode=0755
         state=directory
 
-- name: download fedora $fedora_current live iso 
+- name: download fedora $fedora_current live iso
   get_url: url=http://download.fedoraproject.org/pub/fedora/linux/releases/$fedora_current/Live/x86_64/Fedora-$fedora_current-x86_64-Live-Desktop.iso
            dest=/var/lib/tftpboot/fedora-live/Fedora-$fedora_current-x86_64-Live-Desktop.iso
            mode=0644
@@ -26,7 +26,7 @@
 #        state=absent
 
 - name: put a configuration fragement for 'fedora rescue' in place
-  template: src=files/pxe/013-live.j2 
+  template: src=files/pxe/013-live.j2
             dest=/var/lib/tftpboot/pxelinux.cfg/tmp/013-live
             mode=0644
 

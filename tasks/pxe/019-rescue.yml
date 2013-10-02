@@ -21,6 +21,6 @@
            mode=0664
 
 - name: put a configuration fragement for 'fedora rescue' in place
-  template: src=files/pxe/019-rescue.j2 
+  template: src=files/pxe/019-rescue.j2
             dest=/var/lib/tftpboot/pxelinux.cfg/tmp/019-rescue
             mode=0644
