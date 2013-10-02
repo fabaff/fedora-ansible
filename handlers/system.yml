@@ -3,11 +3,11 @@
 # Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
-# 
+#
 # Usage:
 #  handlers:
 #    - include: handlers/system.yml
-# 
+#
 ---
 - name: reboot system
   command: /usr/sbin/reboot
