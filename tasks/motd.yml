@@ -6,12 +6,12 @@
 #
 ---
 - name: distribute motd file for fedora
-  template: src=files/f-motd.j2
+  template: src=files/fc-motd.j2
             dest=/etc/motd
             owner=root
             group=root
             mode=0644
-  only_if: "'$ansible_distribution' == 'Fedora'"
+  when: ansible_distribution == 'Fedora'
 
 - name: distribute motd file for scientific linux
   template: src=files/sl-motd.j2
@@ -19,7 +19,7 @@
             owner=root
             group=root
             mode=0644
-  only_if: "'$ansible_distribution' == 'Scientific'"
+  when: ansible_distribution == 'Scientific'
 
 - name: distribute motd file for alpine linux
   template: src=files/al-motd.j2
@@ -27,4 +27,12 @@
             owner=root
             group=root
             mode=0644
-  only_if: "'$ansible_distribution' == 'Alpine'"
+  when: ansible_distribution == 'Alpine'
+
+- name: distribute motd file for debian
+  template: src=files/de-motd.j2
+            dest=/etc/motd
+            owner=root
+            group=root
+            mode=0644
+  when: ansible_distribution == 'Debian'
