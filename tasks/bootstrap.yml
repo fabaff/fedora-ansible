@@ -7,14 +7,17 @@
 #
 ---
 - name: download the bootstrap zip archive
-  get_url: url=http://getbootstrap.com/bs-v3.0.0-rc1-dist.zip
+  get_url: url=https://github.com/twbs/bootstrap/releases/download/v$bootstrap_version/bootstrap-$bootstrap_version-dist.zip
            dest=/var/www/lighttpd/bootstrap.zip
-           mode=0440
+           mode=0644
 
-- name: unpack the archive
+- name: unpack the bootstrap archive
   command: /usr/bin/unzip -o /var/www/lighttpd/bootstrap.zip -d /var/www/lighttpd/
 
-- name: delete the archive
+- name: rename the created folder
+  command: /usr/bin/mv /var/www/lighttpd/dist /var/www/lighttpd/bootstrap
+
+- name: delete the bootstrap archive
   file: path=/var/www/lighttpd/bootstrap.zip
         state=absent
 
