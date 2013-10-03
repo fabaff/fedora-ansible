@@ -21,4 +21,4 @@
   lineinfile: dest=/var/www/lighttpd/index.html
               regexp='^<!--IN-->'
               insertafter='        <!--IN-->'
-              line='        <a href="/cgp" class="btn btn-primary">CGP</a>'
+              line='        <a href="/cgp" class="btn btn-default">CGP</a>'
