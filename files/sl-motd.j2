@@ -1,0 +1,16 @@
+
+                  This system is managed by Ansible.
+      ____       _            _   _  __ _        _     _                  
+     / ___|  ___(_) ___ _ __ | |_(_)/ _(_) ___  | |   (_)_ __  _   ___  __
+     \___ \ / __| |/ _ \ '_ \| __| | |_| |/ __| | |   | | '_ \| | | \ \/ /
+      ___) | (__| |  __/ | | | |_| |  _| | (__  | |___| | | | | |_| |>  < 
+     |____/ \___|_|\___|_| |_|\__|_|_| |_|\___| |_____|_|_| |_|\__,_/_/\_\
+
+  OS          : {{ ansible_distribution }} {{ ansible_distribution_version }} ({{ ansible_distribution_release }})
+  Hostname    : {{ ansible_hostname }}
+  IP address  : {{ ansible_eth0.ipv4.address }}
+  System type : {{ ansible_system }}
+  Kernel      : {{ ansible_kernel }}
+  Virt type   : {{ ansible_virtualization_type }}
+
+

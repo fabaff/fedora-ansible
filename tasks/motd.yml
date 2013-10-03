@@ -5,9 +5,26 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: put a default motd file in place
-  template: src=files/motd.j2
+- name: update all packages
+  template: src=files/f-motd.j2
             dest=/etc/motd
             owner=root
             group=root
             mode=0644
+  only_if: "'$ansible_distribution' == 'Fedora'"
+
+- name: update all packages
+  template: src=files/sl-motd.j2
+            dest=/etc/motd
+            owner=root
+            group=root
+            mode=0644
+  only_if: "'$ansible_distribution' == 'Scientific'"
+
+- name: update all packages
+  template: src=files/al-motd.j2
+            dest=/etc/motd
+            owner=root
+            group=root
+            mode=0644
+  only_if: "'$ansible_distribution' == 'Alpine'"
