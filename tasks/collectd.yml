@@ -24,12 +24,12 @@
 - name: create the log file
   command: /usr/bin/touch /var/log/collectd.log
 
-- name: enable collectd on boot and start
+- name: enable collectd on boot and start it
   service: name=collectd
            state=started
            enabled=yes
 
-- name: configure firewall, allow traffic
+- name: configure firewall, allow traffic on port 25826
   command: /usr/bin/firewall-cmd --permanent --add-port=25826/udp
 
 - name: reload firewall configuration
@@ -39,7 +39,7 @@
   command: /usr/bin/git clone git://github.com/pommi/CGP.git /var/www/lighttpd/cgp
 
 - name: set selinux context
-  command: /usr/bin/chcon -h unconfined_u:object_r:httpd_log_t:s0 /var/lib/collectd/rrd
+  command: /usr/bin/chcon -h unconfined_u:object_r:httpd_log_t:s0 /var/lib/collectd/rrd/
 
 - name: set selinux context
   command: /usr/bin/chcon -R unconfined_u:object_r:httpd_sys_content_t:s0 /var/lib/collectd/rrd

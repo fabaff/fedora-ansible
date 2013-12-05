@@ -597,7 +597,7 @@ LoadPlugin uptime
 #	TimeToLive "128"
 #
 #	# server setup:
-	Listen "{{ ansible_eth0.ipv4.address }}" "25826"
+	Listen "{{ ansible_default_ipv4.address }}" "25826"
 #	<Listen "239.192.74.66" "25826">
 #		SecurityLevel Sign
 #		AuthFile "/etc/collectd/passwd"

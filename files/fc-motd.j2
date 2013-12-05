@@ -6,9 +6,9 @@
                        |  _|  __/ (_| | (_) | | | (_| |
                        |_|  \___|\__,_|\___/|_|  \__,_|
           
-          OS          : {{ ansible_distribution }} {{ ansible_distribution_version }} ({{ ansible_distribution_release }})
+          OS          : {{ ansible_distribution }} {{ ansible_distribution_version }}
           Hostname    : {{ ansible_hostname }}
-          IP address  : {{ ansible_eth0.ipv4.address }}
+          IP address  : {{ ansible_default_ipv4.address }}
           System type : {{ ansible_system }}
           Kernel      : {{ ansible_kernel }}
 
