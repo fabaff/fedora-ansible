@@ -22,3 +22,11 @@ default_user_password: password
 
 # Default mysql password
 mysql_root_password: password
+
+# Cert information
+cert_country: CH
+cert_province: BE
+cert_city: Berne
+cert_org: Affolter
+cert_cn: xyz
+cert_email: root@localhost
