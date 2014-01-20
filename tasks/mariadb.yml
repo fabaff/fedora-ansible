@@ -1,0 +1,68 @@
+# This playbook install the MariaDB SQL server (https://mariadb.org/).
+#
+# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+# Based on a playbook by https://github.com/fourkitchens/server-playbooks
+---
+- name: install mariadb and related packages
+  yum: pkg={{ item }}
+       state=present
+  with_items:
+    - mariadb
+    - mariadb-server
+    - MySQL-python
+    - php-mysql
+    - php-pear
+
+- name: start sql service and enable the service
+  service: name=mariadb
+           state=started
+           enabled=yes
+
+- name: set the sql root password
+  mysql_user: user=root
+              password={{ mysql_root_password }}
+              host=localhost
+
+- name: config for easy access as root user
+  template: src=files/my-cnf.j2
+            dest=/root/.my.cnf
+
+- name: delete anonymous sql server user for {{ server_hostname }}
+  mysql_user: user=""
+              host="{{ server_hostname }}"
+              state="absent"
+
+- name: delete anonymous sql server user for localhost
+  mysql_user: user=""
+              state="absent"
+
+- name: secure the sql root user for ipv6 localhost (::1)
+  mysql_user: user="root"
+              password="{{ mysql_root_password }}"
+              host="::1"
+
+- name: secure the sql root user for ipv4 localhost (127.0.0.1)
+  mysql_user: user="root"
+              password="{{ mysql_root_password }}"
+              host="127.0.0.1"
+
+- name: secure the sql root user for localhost domain (localhost)
+  mysql_user: user="root"
+              password="{{ mysql_root_password }}"
+              host="localhost"
+
+- name: secure the sql root user for {{ server_hostname }} domain
+  mysql_user: user="root"
+              password="{{ mysql_root_password }}"
+              host="{{ server_hostname }}"
+
+- name: remove the mysql test database
+  mysql_db: db=test
+            state=absent
+
+- name: create the webshop database
+  mysql_db: db=webshop
+            state=present
