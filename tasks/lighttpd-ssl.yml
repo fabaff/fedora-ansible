@@ -25,7 +25,7 @@
               state=present
 
 - name: enable fastcgi support
-  template: src=files/lighttpd-fastcgi.j2 
+  template: src=files/fastcgi.j2 
             dest=/etc/lighttpd/conf.d/fastcgi.conf
             owner=root
             group=root
@@ -55,7 +55,7 @@
   lineinfile: dest=/etc/lighttpd/lighttpd.conf
               regexp='^ssl.pemfile = "/path/to/server.pem"'
               insertafter='^##   ssl.pemfile = "/path/to/server.pem"'
-              line='ssl.pemfile = "/etc/lighttpd/certs/webshop.pem"'
+              line='ssl.pemfile = "/etc/lighttpd/certs/server.pem"'
               state=present
 
 - name: create directory for certs
@@ -66,7 +66,7 @@
         group=lighttpd
 
 - name: create ssl certificates
-  command: openssl req -x509 -nodes -days 7300 -subj "/C=$cert_country/ST=$cert_province/L=$cert_city/O=$cert_org/CN=$cert_cn/Email=$cert_email" -newkey rsa:2048 -keyout /etc/lighttpd/certs/webshop.pem -out /etc/lighttpd/certs/webshop.pem
+  command: openssl req -x509 -nodes -days 7300 -subj "/C={{ cert_country }}/ST={{ cert_province }}/L={{cert_city}}/O={{cert_org}}/CN={{cert_cn}}/Email={{cert_email}}" -newkey rsa:2048 -keyout /etc/lighttpd/certs/server.pem -out /etc/lighttpd/certs/server.pem
 
 - name: start lighttpd
   service: name=lighttpd
