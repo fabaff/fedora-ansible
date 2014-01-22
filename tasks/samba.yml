@@ -1,12 +1,12 @@
 # This playbook install the samba (http://www.samba.org/) server.
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: install samba and related packages
-  yum: pkg=$item
+  yum: pkg={{ item }}
        state=present 
   with_items:
     - cups-libs
@@ -40,13 +40,14 @@
               line='[samba]\n\tpath = /opt/samba/\n\tread only = no\n;\tbrowseable = yes\n'
 
 - name: configure firewall, allow samba traffic
-  command: /usr/bin/firewall-cmd --permanent --add-service=samba
+  firewalld: service=samba
+             permanent=true
+             state=enabled
 
-- name: configure firewall, allow samba traffic
-  command: /usr/bin/firewall-cmd --permanent --add-service=samba-client
-
-- name: reload firewall configuration
-  command: /usr/bin/firewall-cmd --reload
+- name: configure firewall, allow samba-client traffic
+  firewalld: service=samba-client
+             permanent=true
+             state=enabled
 
 - name: start samba
   service: name=smb
