@@ -1,6 +1,6 @@
 # This playbook install the collectd (http://collectd.org/) server.
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -29,11 +29,10 @@
            state=started
            enabled=yes
 
-- name: configure firewall, allow traffic on port 25826
-  command: /usr/bin/firewall-cmd --permanent --add-port=25826/udp
-
-- name: reload firewall configuration
-  command: /usr/bin/firewall-cmd --reload
+- name: configure firewall, allow traffic to port 25826
+  firewalld: port=25826/udp
+             permanent=true
+             state=enabled
 
 - name: checkout the source
   command: /usr/bin/git clone git://github.com/pommi/CGP.git /var/www/lighttpd/cgp
