@@ -1,12 +1,12 @@
 # This playbook setup nfs (http://nfs.sourceforge.net/) capability.
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: install nfs package
-  yum: pkg=$item
+  yum: pkg={{ item }}
        state=present 
   with_items:
     - nfs-utils
@@ -25,13 +25,12 @@
   lineinfile: dest=/etc/exports
               regexp=''
               insertafter=EOF
-              line='/opt/nfs/ ${ansible_eth0.ipv4.network}/24(rw,sync)'
+              line='/opt/nfs/ {{ansible_eth0.ipv4.network }}/24(rw,sync)'
 
-- name: configure firewall, allow nfs traffic
-  command: /usr/bin/firewall-cmd --permanent --add-service=nfs
-
-- name: reload firewall configuration
-  command: /usr/bin/firewall-cmd --reload
+- name: configure firewall, allow traffic to port 1883
+  firewalld: aervice=nfs
+             permanent=true
+             state=enabled
 
 #- name: start rpcbind
 #  service: name=rpcbind
