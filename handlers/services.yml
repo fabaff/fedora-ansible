@@ -1,6 +1,6 @@
 # This files contains service handlers for Fedora.
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -38,3 +38,13 @@
 
 - name: restart mysql
   service: name=mysqld state=restarted
+
+# Control handlers for mosquitto
+- name: start mosquitto
+  service: name=mosquitto state=started
+
+- name: stop mosquitto
+  service: name=mosquitto state=stopped
+
+- name: restart mosquitto
+  service: name=mosquitto state=restarted
