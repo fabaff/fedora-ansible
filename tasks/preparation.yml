@@ -1,6 +1,6 @@
 # This playbook install all needed components for the setup.
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -9,7 +9,7 @@
   command: /usr/bin/yum -y update
 
 - name: install additional packages
-  yum: pkg=$item
+  yum: pkg={{ item }}
        state=present
   with_items:
     - unzip
