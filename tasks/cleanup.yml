@@ -1,12 +1,12 @@
 # This playbook remove all components which were needed for the setup. 
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: remove additional packages
-  yum: pkg=$item
+  yum: pkg={{ item }}
        state=absent
   with_items:
     - unzip
@@ -17,7 +17,7 @@
   command: /usr/bin/yum clean all
 
 - name: delete cache files
-  file: path=/var/cache/$item
+  file: path=/var/cache/{{ item }}
         state=absent
   with_items:
     - yum
