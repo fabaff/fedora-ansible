@@ -5,7 +5,7 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: distribute motd file for fedora
+- name: distribute motd file
   template: src=motd.j2
             dest=/etc/motd
             owner=root
