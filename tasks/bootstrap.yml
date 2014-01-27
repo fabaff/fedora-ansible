@@ -1,13 +1,13 @@
 # This playbook install the bootstrap (http://twitter.github.com/bootstrap/)
 # javascript framework.
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: download the bootstrap zip archive
-  get_url: url=https://github.com/twbs/bootstrap/releases/download/v$bootstrap_version/bootstrap-$bootstrap_version-dist.zip
+  get_url: url=https://github.com/twbs/bootstrap/releases/download/v{{ bootstrap_version }}/bootstrap-{{ bootstrap_version }}-dist.zip
            dest=/var/www/lighttpd/bootstrap.zip
            mode=0644
 
@@ -29,7 +29,7 @@
             mode=0755
 
 - name: remove lighttpd default file (images)
-  file: path=/var/www/lighttpd/$item
+  file: path=/var/www/lighttpd/{{ item }}
         state=absent
   with_items:
     - light_logo.png
