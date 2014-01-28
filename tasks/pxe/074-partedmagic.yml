@@ -1,13 +1,10 @@
 # This playbook creates a PXE server entry for PartedMagic (http://partedmagic.com).
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install the unzip package
-  command: /usr/bin/dnf -y install unzip
-
 - name: create the a directory for partedmagic
   file: path=/var/lib/tftpboot/partedmagic
         mode=0755
@@ -39,6 +36,3 @@
   template: src=files/pxe/074-partedmagic.j2
             dest=/var/lib/tftpboot/pxelinux.cfg/tmp/074-partedmagic
             mode=0644
-
-- name: remove the unzip package
-  command: /usr/bin/dnf -y erase unzip
