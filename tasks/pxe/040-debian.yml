@@ -1,6 +1,6 @@
 # This playbook creates a PXE server entry for Debian installations.
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -28,7 +28,7 @@
   command: /usr/bin/mv /var/lib/tftpboot/debian/debian-installer/amd64/initrd.gz /var/lib/tftpboot/debian/initrd.gz
 
 - name: delete files
-  file: path=/var/lib/tftpboot/debian/$item
+  file: path=/var/lib/tftpboot/debian/{{ item }}
         state=absent
   with_items:
     - debian-installer
