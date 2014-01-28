@@ -17,6 +17,9 @@ fedora_next: 21
 freedos_previous: 1.0
 freedos_current: 11
 
+# DBAN - http://www.dban.org/
+dban_current: 2.2.8
+
 ## Application
 # linfo - http://linfo.sourceforge.net/
 linfo_version: 1.9
