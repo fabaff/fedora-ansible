@@ -1,6 +1,6 @@
 # This playbook creates a PXE server entry for Fedora installation.
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -11,13 +11,13 @@
         state=directory
 
 - name: download vmlinuz
-  get_url: url=http://ftp-stud.hs-esslingen.de/pub/fedora/linux/releases/$fedora_current/Fedora/x86_64/os/images/pxeboot/vmlinuz
-           dest=/var/lib/tftpboot/fedora/vmlinuz-f$fedora_current
+  get_url: url=http://ftp-stud.hs-esslingen.de/pub/fedora/linux/releases/{{ fedora_current }}/Fedora/x86_64/os/images/pxeboot/vmlinuz
+           dest=/var/lib/tftpboot/fedora/vmlinuz-f{{ fedora_current }}
            mode=0644
 
 - name: download initrd
-  get_url: url=http://ftp-stud.hs-esslingen.de/pub/fedora/linux/releases/$fedora_current/Fedora/x86_64/os/images/pxeboot/initrd.img
-           dest=/var/lib/tftpboot/fedora/initrd-f$fedora_current.img
+  get_url: url=http://ftp-stud.hs-esslingen.de/pub/fedora/linux/releases/{{ fedora_current }}/Fedora/x86_64/os/images/pxeboot/initrd.img
+           dest=/var/lib/tftpboot/fedora/initrd-f{{ fedora_current.img }}
            mode=0664
 
 - name: put a configuration fragement for 'fsl test bench' in place
