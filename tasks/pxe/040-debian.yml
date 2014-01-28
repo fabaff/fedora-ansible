@@ -5,9 +5,6 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-- name: install the tar package
-  command: /usr/bin/dnf -y install tar
-
 - name: create the a directory for debian
   file: path=/var/lib/tftpboot/debian
         mode=0755
@@ -41,6 +38,3 @@
   template: src=files/pxe/040-debian.j2
             dest=/var/lib/tftpboot/pxelinux.cfg/tmp/040-debian
             mode=0644
-
-- name: remove the tar package
-  command: /usr/bin/dnf -y erase tar
