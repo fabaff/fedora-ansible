@@ -7,11 +7,17 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
+## Operating systems
 # Fedora - http://fedoraproject.org
 fedora_previous: 19
 fedora_current: 20
 fedora_next: 21
 
+# Freedos - http://www.freedos.org
+freedos_previous: 1.0
+freedos_current: 11
+
+## Application
 # linfo - http://linfo.sourceforge.net/
 linfo_version: 1.9
 
