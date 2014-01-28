@@ -14,18 +14,18 @@
     - php-mbstring
 
 - name: download the phpsysinfo source tarball
-  get_url: url=https://github.com/rk4an/phpsysinfo/archive/v$phpsysinfo_version.tar.gz
-           dest=/var/www/lighttpd/phpsysinfo-$phpsysinfo_version.tar.gz
+  get_url: url=https://github.com/rk4an/phpsysinfo/archive/v{{ phpsysinfo_version}} .tar.gz
+           dest=/var/www/lighttpd/phpsysinfo-{{ phpsysinfo_version }}.tar.gz
            mode=0440
 
 - name: unpack the source tarball
-  command: /usr/bin/tar -xzf /var/www/lighttpd/phpsysinfo-$phpsysinfo_version.tar.gz -C /var/www/lighttpd/
+  command: /usr/bin/tar -xzf /var/www/lighttpd/phpsysinfo-{{ phpsysinfo_version }}.tar.gz -C /var/www/lighttpd/
 
 - name: rename the source directory
-  command: /usr/bin/mv /var/www/lighttpd/phpsysinfo-$phpsysinfo_version /var/www/lighttpd/phpsysinfo
+  command: /usr/bin/mv /var/www/lighttpd/phpsysinfo-{{ phpsysinfo_version}}  /var/www/lighttpd/phpsysinfo
 
 - name: delete the archive
-  file: path=/var/www/lighttpd/phpsysinfo-$phpsysinfo_version.tar.gz
+  file: path=/var/www/lighttpd/phpsysinfo-{{ phpsysinfo_version }}.tar.gz
         state=absent
 
 - name: copy the default config file
