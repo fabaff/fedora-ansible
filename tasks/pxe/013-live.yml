@@ -14,7 +14,7 @@
         state=directory
 
 - name: download fedora live iso
-  get_url: url=http://download.fedoraproject.org/pub/fedora/linux/releases/$fedora_current }}/Live/x86_64/Fedora-$fedora_current }}-x86_64-Live-Desktop.iso
+  get_url: url=http://download.fedoraproject.org/pub/fedora/linux/releases/$fedora_current }}/Live/x86_64/Fedora-{{ fedora_current }}-x86_64-Live-Desktop.iso
            dest=/var/lib/tftpboot/fedora-live/Fedora-{{ fedora_current }}-x86_64-Live-Desktop.iso
            mode=0644
 
