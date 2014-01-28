@@ -1,6 +1,6 @@
 # This playbook creates a PXE server entry for xPUD (http://www.xpud.org/).
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -11,8 +11,8 @@
         state=directory
 
 - name: download vmlinuz
-  get_url: url=http://mesrss.free.fr/xpud/xpud-0.9.2-image
-           dest=/var/lib/tftpboot/xpud/xpud-0.9.2-image
+  get_url: url=http://mesrss.free.fr/xpud/xpud-{{ xpud_current }}-image
+           dest=/var/lib/tftpboot/xpud/xpud-{{ xpud_current }}-image
            mode=0644
 
 - name: put a configuration fragement for 'xpud' in place
