@@ -11,8 +11,8 @@
         state=directory
 
 - name: download hdt image
-  get_url: url=http://hdt-project.org/raw-attachment/wiki/hdt-0.5.0/hdt-0.5.2.img
-           dest=/var/lib/tftpboot/hdt/hdt-0.5.2.img
+  get_url: url=http://hdt-project.org/raw-attachment/wiki/hdt-0.5.0/hdt-{{ hdt_current }}.img
+           dest=/var/lib/tftpboot/hdt/hdt-{{ hdt_current }}.img
            mode=0755
 
 - name: put a configuration fragement for 'hdt' in place
