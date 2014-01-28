@@ -1,6 +1,6 @@
-# This playbook creates a PXE server entry for Alpine Linux.
+# This playbook creates a PXE server entry for Alpine Linux (http://alpinelinux.org/).
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -11,8 +11,8 @@
         state=directory
 
 - name: download the alpine iso image
-  get_url: url=http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v2.5/releases/x86_64/alpine-mini-2.5.4-x86_64.iso
-           dest=/var/lib/tftpboot/alpine/alpine-mini-2.5.4-x86_64.iso
+  get_url: url=http://wiki.alpinelinux.org/cgi-bin/dl.cgi/v2.7/releases/x86_64/alpine-mini-{{ alpine_current }}-x86_64.iso
+           dest=/var/lib/tftpboot/alpine/alpine-mini-{{ alpine_current }}-x86_64.iso
            mode=0755
 
 - name: create the a directory for alpine
@@ -21,10 +21,10 @@
         state=directory
 
 - name: mount iso image
-  command: /usr/bin/mount -o loop /var/lib/tftpboot/alpine/alpine-mini-2.5.4-x86_64.iso /var/lib/tftpboot/alpine/iso
+  command: /usr/bin/mount -o loop /var/lib/tftpboot/alpine/alpine-mini-{{ alpine_current }}-x86_64.iso /var/lib/tftpboot/alpine/iso
 
 - name: copy the needed files from the mounted iso
-  command: /usr/bin/cp /var/lib/tftpboot/alpine/iso/boot/$item /var/lib/tftpboot/alpine/$item
+  command: /usr/bin/cp /var/lib/tftpboot/alpine/iso/boot/$item /var/lib/tftpboot/alpine/{{ item }}
   with_items:
     - grsec
     - grsec.gz
