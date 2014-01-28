@@ -1,6 +1,6 @@
 # This playbook creates a PXE server entry for FreeDOS (http://www.freedos.org).
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -11,12 +11,12 @@
         state=directory
 
 - name: download freedos image
-  get_url: url=http://ftp.gwdg.de/pub/misc/freedos/files/distributions/1.0/fdboot.img
+  get_url: url=http://ftp.gwdg.de/pub/misc/freedos/files/distributions/{{ freedos_previous }}/fdboot.img
            dest=/var/lib/tftpboot/freedos/fdboot.img
            mode=0755
 
 #- name: download the freedos iso image
-#  get_url: url=http://www.freedos.org/download/download/fd11src.iso
+#  get_url: url=http://www.freedos.org/download/download/fd{{ freedos_current }}src.iso
 #           dest=/var/lib/tftpboot/freedos/freedos.iso
 #           mode=0755
 
