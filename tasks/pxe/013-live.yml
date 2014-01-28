@@ -1,6 +1,6 @@
 # This playbook creates a PXE server entry for a Fedora Live system.
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -13,16 +13,16 @@
         mode=0755
         state=directory
 
-- name: download fedora $fedora_current live iso
-  get_url: url=http://download.fedoraproject.org/pub/fedora/linux/releases/$fedora_current/Live/x86_64/Fedora-$fedora_current-x86_64-Live-Desktop.iso
-           dest=/var/lib/tftpboot/fedora-live/Fedora-$fedora_current-x86_64-Live-Desktop.iso
+- name: download fedora live iso
+  get_url: url=http://download.fedoraproject.org/pub/fedora/linux/releases/$fedora_current }}/Live/x86_64/Fedora-$fedora_current }}-x86_64-Live-Desktop.iso
+           dest=/var/lib/tftpboot/fedora-live/Fedora-{{ fedora_current }}-x86_64-Live-Desktop.iso
            mode=0644
 
 - name: extract the needed files
-  command: /usr/bin/livecd-iso-to-pxeboot /var/lib/tftpboot/fedora-live/Fedora-$fedora_current-x86_64-Live-Desktop.iso
+  command: /usr/bin/livecd-iso-to-pxeboot /var/lib/tftpboot/fedora-live/Fedora-{{ fedora_current }}-x86_64-Live-Desktop.iso
 
 #- name: delete the iso image
-#  file: path=/var/lib/tftpboot/fedora-live/Fedora-$fedora_current-x86_64-Live-Desktop.iso
+#  file: path=/var/lib/tftpboot/fedora-live/Fedora-{{ fedora_current }}-x86_64-Live-Desktop.iso
 #        state=absent
 
 - name: put a configuration fragement for 'fedora rescue' in place
