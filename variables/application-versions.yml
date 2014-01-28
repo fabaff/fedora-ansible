@@ -7,7 +7,7 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
-## Operating systems
+### Operating systems
 # Fedora - http://fedoraproject.org
 fedora_previous: 19
 fedora_current: 20
@@ -20,7 +20,10 @@ freedos_current: 11
 # DBAN - http://www.dban.org/
 dban_current: 2.2.8
 
-## Application
+# HDT- http://hdt-project.org
+hdt_current: 0.5.2
+
+### Application
 # linfo - http://linfo.sourceforge.net/
 linfo_version: 1.9
 
