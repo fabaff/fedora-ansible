@@ -1,13 +1,13 @@
 # This playbook install the RPMFusion (http://rpmfusion.org/) repository on
 # Fedora hosts.
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: install the rpmfusion free package
-  command: /usr/bin/rpm -ihv http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$fedora_current.noarch.rpm
+  command: /usr/bin/rpm -ihv http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_current }}.noarch.rpm
 
 - name: install the rpmfusion nonfree package
-  command: /usr/bin/rpm -ihv http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$fedora_current.noarch.rpm
+  command: /usr/bin/rpm -ihv http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_current }}.noarch.rpm
