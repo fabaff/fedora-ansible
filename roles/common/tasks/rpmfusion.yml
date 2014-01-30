@@ -1,0 +1,28 @@
+# This playbook makes the RPMFusion (http://rpmfusion.org/) repository available.
+#
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: get the repo file for rpmfusion free
+  get_url: url=http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_current }}.noarch.rpm
+           dest=/tmp/rpmfusion-free-release-{{ fedora_current }}.noarch.rpm
+
+- name: get the repo file for rpmfusion non-free
+  get_url: url=http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_current }}.noarch.rpm
+           dest=/tmp/rpmfusion-free-release-{{ fedora_current }}.noarch.rpm
+
+- name: install the rpmfusion repo packages
+  yum: pkg=/tmp/{{ item }}
+       state=installed
+    with_items:
+      - rpmfusion-free-release-{{ fedora_current }}.noarch.rpm
+      - rpmfusion-nonfree-release-{{ fedora_current }}.noarch.rpm
+
+- name: delete the rpmfusion repo package
+  file: path=/tmp/{{ item }}
+        state=absent
+    with_items:
+      - rpmfusion-free-release-{{ fedora_current }}.noarch.rpm
+      - rpmfusion-nonfree-release-{{ fedora_current }}.noarch.rpm
