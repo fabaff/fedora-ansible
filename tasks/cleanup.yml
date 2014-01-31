@@ -21,3 +21,6 @@
         state=absent
   with_items:
     - yum
+
+- name: reload firewall configuration
+  command: /usr/bin/firewall-cmd --reload
