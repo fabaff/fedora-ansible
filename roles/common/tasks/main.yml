@@ -7,3 +7,4 @@
 ---
   - include: motd.yml
   - include: rpmfusion.yml
+  - include: packages.yml
