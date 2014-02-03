@@ -1,0 +1,26 @@
+nicstat# This playbook installs additional packages.
+#
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install additional packages
+  yum: pkg={{ item }}
+       state=present
+  with_items:
+    - unzip
+    - tar
+    - pbzip2
+    - dnf
+    - mc
+    - nano
+    - bash-completion 
+    - mosh
+    - hdparm
+    - htop
+    - iptraf
+    - iperf-ng
+    - ntop
+    - nicstat
+    - iftop
