@@ -1,4 +1,4 @@
-nicstat# This playbook installs additional packages.
+# This playbook installs additional packages.
 #
 # Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
@@ -20,7 +20,7 @@ nicstat# This playbook installs additional packages.
     - hdparm
     - htop
     - iptraf
-    - iperf-ng
+    - iperf3
     - ntop
     - nicstat
     - iftop
