@@ -1,12 +1,12 @@
 # This playbook install phpmyadmin (http://www.phpmyadmin.net).
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: install additional php packages
-  yum: pkg=$item
+  yum: pkg={{ item }}
        state=present
   with_items:
     - php-mysql
@@ -15,22 +15,16 @@
     - php-gd
 
 - name: download the source tarball
-  get_url: url=http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-$phpmyadmin_version-all-languages.tar.gz
-           dest=/var/www/lighttpd/phpmyadmin-$phpmyadmin_version.tar.gz
+  get_url: url=http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-{{ phpmyadmin_version }}-all-languages.tar.gz
+           dest=/var/www/lighttpd/phpmyadmin-{{ phpmyadmin_version }}.tar.gz
            mode=0440
 
 - name: unpack the source tarball
-  command: /usr/bin/tar -xzf /var/www/lighttpd/phpmyadmin-$phpmyadmin_version.tar.gz -C /var/www/lighttpd/
+  command: /usr/bin/tar -xzf /var/www/lighttpd/phpmyadmin-{{ phpmyadmin_version }}.tar.gz -C /var/www/lighttpd/
 
 - name: rename the source directory
-  command: /usr/bin/mv /var/www/lighttpd/phpMyAdmin-$phpmyadmin_version-all-languages /var/www/lighttpd/phpmyadmin
+  command: /usr/bin/mv /var/www/lighttpd/phpMyAdmin-{{ phpmyadmin_version }}-all-languages /var/www/lighttpd/phpmyadmin
 
 - name: delete the archive
-  file: path=/var/www/lighttpd/phpmyadmin-$phpmyadmin_version.tar.gz
+  file: path=/var/www/lighttpd/phpmyadmin-{{ phpmyadmin_version }}.tar.gz
         state=absent
-
-- name: add a new entry to the index.html page
-  lineinfile: dest=/var/www/lighttpd/index.html
-              regexp='^<!--IN-->'
-              insertafter='        <!--IN-->'
-              line='        <a href="/phpmyadmin" class="btn btn-primary">phpMyAdmin</a>'
