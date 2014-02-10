@@ -18,7 +18,7 @@
     - include: tasks/motd.yml
 #    - include: tasks/lighttpd.yml
     - include: tasks/lighttpd-ssl.yml
-#    - include: tasks/mariadb.yml
+    - include: tasks/mariadb.yml
 
   handlers:
    - include: handlers/system.yml
