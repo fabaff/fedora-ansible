@@ -31,4 +31,4 @@ phpmyadmin_version: 4.1.7
 dokuwiki_version: 2013-03-06
 
 # Bootstrap - http://getbootstrap.com/
-bootstrap_version: 3.1.0
+bootstrap_version: 3.1.1
