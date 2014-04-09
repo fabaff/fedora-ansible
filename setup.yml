@@ -1,11 +1,11 @@
 # This playbook contains example tasks to perform on a fresh Fedora
 # installation. 
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
-# Usage: ansible-playbook setup.yml -f 10
+# Usage: sudo ansible-playbook setup.yml -f 10
 
 ---
 - hosts: fedora
