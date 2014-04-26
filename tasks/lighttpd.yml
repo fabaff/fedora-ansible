@@ -38,7 +38,7 @@
 - name: start lighttpd
   service: name=lighttpd
            state=running
-           enabled=yes 
+           enabled=yes
 
 - name: configure firewall, allow traffic to port 80
   firewalld: port=80/tcp
