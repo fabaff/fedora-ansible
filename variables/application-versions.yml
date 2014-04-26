@@ -16,7 +16,7 @@ fedora_next: 21
 linfo_version: 1.9
 
 # piwik - http://piwik.org/
-piwik_version: 1.12
+piwik_version: 2.2.0
 
 # phpsysinfo - http://rk4an.github.com/phpsysinfo/
 phpsysinfo_version: 3.1.11
