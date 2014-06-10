@@ -43,7 +43,7 @@ phpsysinfo_version: 3.1.12
 phpshell_version: 2.4
 
 # phpMyAdmin- http://www.phpmyadmin.net
-phpmyadmin_version: 4.2.2
+phpmyadmin_version: 4.2.3
 
 # DokuWiki - https://www.dokuwiki.org/dokuwiki
 dokuwiki_version: 2013-03-06
