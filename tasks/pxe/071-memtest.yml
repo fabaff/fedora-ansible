@@ -11,7 +11,7 @@
         state=directory
 
 - name: download memtest
-  get_url: url=http://ftp-stud.hs-esslingen.de/pub/fedora/linux/releases/18/Fedora/x86_64/os/isolinux/memtest
+  get_url: url=http://ftp-stud.hs-esslingen.de/pub/fedora/linux/releases/{{ fedora_current }}/Fedora/x86_64/os/isolinux/memtest
            dest=/var/lib/tftpboot/memtest
            mode=0755
 
