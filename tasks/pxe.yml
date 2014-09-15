@@ -47,7 +47,7 @@
 
 ## No sub menu
 # 010 - 069: Operating system
-#- include: tasks/pxe/010-submenu-start.yml
+- include: tasks/pxe/010-submenu-start.yml
 - include: tasks/pxe/011-fedora.yml
 #- include: tasks/pxe/012-fsl-tb.yml
 #- include: tasks/pxe/013-live.yml
@@ -58,7 +58,7 @@
 - include: tasks/pxe/050-xpud.yml
 #- include: tasks/pxe/060-alpine.yml
 - include: tasks/pxe/070-kali.yml
-#- include: tasks/pxe/069-submenu-end.yml
+- include: tasks/pxe/069-submenu-end.yml
 
 ## Sub menu
 # 070 - 089: Tools
@@ -74,6 +74,7 @@
 - include: tasks/pxe/098-reboot.yml
 - include: tasks/pxe/099-shutdown.yml
 # Finishing tasks #############################################################
+
 - name: assemble the default file
   assemble: src=/var/lib/tftpboot/pxelinux.cfg/tmp
             dest=/var/lib/tftpboot/pxelinux.cfg/default
