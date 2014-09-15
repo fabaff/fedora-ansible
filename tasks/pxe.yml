@@ -90,8 +90,10 @@
 - name: enable tftp in xinetd
   command: /usr/bin/sed -i 's|\sdisable\s\{3,\}= yes|\tdisable \t\t= no|g' /etc/xinetd.d/tftp
 
-- name: configure firewall, allow http traffic
-  command: /usr/bin/firewall-cmd --permanent --add-service=tftp
+- name: configure firewall, allow traffic to port 69 for tftp
+  firewalld: port=69/tcp
+             permanent=true
+             state=enabled
 
 - name: reload firewall configuration
   command: /usr/bin/firewall-cmd --reload
