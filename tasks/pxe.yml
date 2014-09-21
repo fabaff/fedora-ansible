@@ -88,13 +88,13 @@
         state=file
 
 - name: enable tftp in xinetd
-  command: sed -i 's|\sdisable\s\{3,\}= yes|\tdisable \t\t= no|g' /etc/xinetd.d/tftp
+  command: /usr/bin/sed -i 's|\sdisable\s\{3,\}= yes|\tdisable \t\t= no|g' /etc/xinetd.d/tftp
 
 - name: configure firewall, allow http traffic
-  command: firewall-cmd --permanent --add-service=tftp
+  command: /usr/bin/firewall-cmd --permanent --add-service=tftp
 
 - name: reload firewall configuration
-  command: firewall-cmd --reload
+  command: /usr/bin/firewall-cmd --reload
 
 - name: start and enable xinetd service
   service: name=xinetd
