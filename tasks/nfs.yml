@@ -28,7 +28,7 @@
               line='/opt/nfs/ {{ansible_eth0.ipv4.network }}/24(rw,sync)'
 
 - name: configure firewall, allow traffic to port 1883
-  firewalld: aervice=nfs
+  firewalld: service=nfs
              permanent=true
              state=enabled
 
