@@ -11,25 +11,25 @@
         state=directory
 
 - name: download partedmagic image
-  get_url: url=https://sourceforge.net/projects/partedmagic/files/partedmagic/Parted%20Magic%202013_02_28/pmagic_pxe_2013_02_28.zip
-           dest=/var/lib/tftpboot/partedmagic/pmagic_pxe_2013_02_28.zip
+  get_url: url=https://sourceforge.net/projects/partedmagic/files/partedmagic/Parted%20Magic%2014_11_19/pmagic_pxe_2014_11_19.zip
+           dest=/var/lib/tftpboot/partedmagic/pmagic_pxe_2014_11_19.zip
            mode=0755
 
 - name: unpack the archive
-  command: /usr/bin/unzip -o /var/lib/tftpboot/partedmagic/pmagic_pxe_2013_02_28.zip -d /var/lib/tftpboot/partedmagic/
+  command: /usr/bin/unzip -o /var/lib/tftpboot/partedmagic/pmagic_pxe_2014_11_19.zip -d /var/lib/tftpboot/partedmagic/
 
 - name: move image
-  command: /usr/bin/mv /var/lib/tftpboot/partedmagic/pmagic_pxe_2013_02_28/pmagic/bzImage64 /var/lib/tftpboot/partedmagic/bzImage64
+  command: /usr/bin/mv /var/lib/tftpboot/partedmagic/pmagic_pxe_2014_11_19/pmagic/bzImage64 /var/lib/tftpboot/partedmagic/bzImage64
 
 - name: move initrf
-  command: /usr/bin/mv /var/lib/tftpboot/partedmagic/pmagic_pxe_2013_02_28/pmagic/initrd.img /var/lib/tftpboot/partedmagic/initrd.img
+  command: /usr/bin/mv /var/lib/tftpboot/partedmagic/pmagic_pxe_2014_11_19/pmagic/initrd.img /var/lib/tftpboot/partedmagic/initrd.img
 
 - name: delete the archive
-  file: path=/var/lib/tftpboot/partedmagic/pmagic_pxe_2013_02_28.zip
+  file: path=/var/lib/tftpboot/partedmagic/pmagic_pxe_2014_11_19.zip
         state=absent
 
 - name: delete the directory
-  file: path=/var/lib/tftpboot/partedmagic/pmagic_pxe_2013_02_28
+  file: path=/var/lib/tftpboot/partedmagic/pmagic_pxe_2014_11_19
         state=absent
 
 - name: put a configuration fragement for 'partedmagic' in place
