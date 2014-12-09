@@ -47,18 +47,19 @@
 
 ## No sub menu
 # 010 - 069: Operating system
-- include: tasks/pxe/010-submenu-start.yml
+#- include: tasks/pxe/010-submenu-start.yml
 - include: tasks/pxe/011-fedora.yml
 #- include: tasks/pxe/012-fsl-tb.yml
 #- include: tasks/pxe/013-live.yml
 - include: tasks/pxe/019-rescue.yml
 - include: tasks/pxe/020-freedos.yml
 - include: tasks/pxe/030-sl.yml
+- include: tasks/pxe/031-co.yml
 - include: tasks/pxe/040-debian.yml
 - include: tasks/pxe/050-xpud.yml
 #- include: tasks/pxe/060-alpine.yml
 - include: tasks/pxe/070-kali.yml
-- include: tasks/pxe/069-submenu-end.yml
+#- include: tasks/pxe/069-submenu-end.yml
 
 ## Sub menu
 # 070 - 089: Tools
