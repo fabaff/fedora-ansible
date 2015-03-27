@@ -1,6 +1,6 @@
 # This playbook creates a PXE server entry for a Fedora Live system.
 #
-# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2015 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -14,12 +14,12 @@
         state=directory
 
 - name: download fedora live iso
-  get_url: url=http://download.fedoraproject.org/pub/fedora/linux/releases/{{ fedora_current }}/Live/x86_64/Fedora-{{ fedora_current }}-x86_64-Live-Desktop.iso
-           dest=/var/lib/tftpboot/fedora-live/Fedora-{{ fedora_current }}-x86_64-Live-Desktop.iso
+  get_url: url=http://ftp-stud.hs-esslingen.de/pub/fedora/linux/releases/{{ fedora_current }}/Workstation/x86_64/iso/Fedora-Live-Workstation-x86_64-{{ fedora_current }}-5.iso
+           dest=/var/lib/tftpboot/fedora-live/Fedora-Live-Workstation-x86_64-{{ fedora_current }}-5.iso
            mode=0644
 
 - name: extract the needed files
-  command: /usr/bin/livecd-iso-to-pxeboot /var/lib/tftpboot/fedora-live/Fedora-{{ fedora_current }}-x86_64-Live-Desktop.iso
+  command: /usr/bin/livecd-iso-to-pxeboot /var/lib/tftpboot/fedora-live/Fedora-Live-Workstation-x86_64-{{ fedora_current }}-5.iso
 
 #- name: delete the iso image
 #  file: path=/var/lib/tftpboot/fedora-live/Fedora-{{ fedora_current }}-x86_64-Live-Desktop.iso
