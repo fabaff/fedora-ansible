@@ -12,15 +12,15 @@
 
 - name: download vmlinuz
   get_url: url=ftp://ftp-stud.hs-esslingen.de/pub/Mirrors/centos/7.0.1406/os/x86_64/isolinux/vmlinuz
-           dest=/var/lib/tftpboot/co/vmlinuz
+           dest=/var/lib/tftpboot/centos/vmlinuz
            mode=0644
 
 - name: download initrd
   get_url: url=ftp://ftp-stud.hs-esslingen.de/pub/Mirrors/centos/7.0.1406/os/x86_64/isolinux/initrd.img
-           dest=/var/lib/tftpboot/co/initrd.img
+           dest=/var/lib/tftpboot/centos/initrd.img
            mode=0644
 
 - name: put a configuration fragement for 'centos linux' in place
   template: src=files/pxe/031-co.j2
-            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/031-co
+            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/031-centos
             mode=0644
