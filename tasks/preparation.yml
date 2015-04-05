@@ -1,6 +1,6 @@
 # This playbook install all needed components for the setup.
 #
-# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2015 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -15,3 +15,11 @@
     - unzip
     - tar
     - git
+    - wget
+
+- name: distribute system_identification file
+  template: src=files/system_identification.j2
+            dest=/etc/system_identification
+            owner=root
+            group=root
+            mode=0644
