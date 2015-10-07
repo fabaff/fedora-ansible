@@ -46,7 +46,7 @@ phpshell_version: 2.4
 phpmyadmin_version: 4.5.0.2
 
 # DokuWiki - https://www.dokuwiki.org/dokuwiki
-dokuwiki_version: 2013-03-06
+dokuwiki_version: 2015-08-10a
 
 # Bootstrap - http://getbootstrap.com
 bootstrap_version: 3.3.5
