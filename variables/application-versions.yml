@@ -21,7 +21,7 @@ freedos_previous: 1.0
 freedos_current: 11
 
 # DBAN - http://www.dban.org
-dban_current: 2.2.8
+dban_current: 2.3.0
 
 # HDT- http://hdt-project.org
 hdt_current: 0.5.2
