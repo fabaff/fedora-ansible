@@ -37,7 +37,7 @@ linfo_version: 1.9
 piwik_version: 2.14.3
 
 # phpsysinfo - http://rk4an.github.com/phpsysinfo
-phpsysinfo_version: 3.1.14
+phpsysinfo_version: 3.2.3
 
 # phpshell - http://phpshell.sourceforge.net
 phpshell_version: 2.4
