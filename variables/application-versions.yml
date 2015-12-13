@@ -2,7 +2,7 @@
 # which will be installed without the package management tool and basic release
 # number as helper variables for playbooks.
 #
-# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2015 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -49,4 +49,4 @@ phpmyadmin_version: 4.5.0.2
 dokuwiki_version: 2015-08-10a
 
 # Bootstrap - http://getbootstrap.com
-bootstrap_version: 3.3.5
+bootstrap_version: 3.3.6
