@@ -34,10 +34,10 @@ xpud_current: 0.9.2
 linfo_version: 2.0.3
 
 # piwik - http://piwik.org/
-piwik_version: 2.14.3
+piwik_version: 2.15.0
 
 # phpsysinfo - http://rk4an.github.com/phpsysinfo
-phpsysinfo_version: 3.2.3
+phpsysinfo_version: 3.2.4
 
 # phpshell - http://phpshell.sourceforge.net
 phpshell_version: 2.4
