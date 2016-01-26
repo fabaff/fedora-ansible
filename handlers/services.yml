@@ -1,6 +1,6 @@
 # This files contains service handlers for Fedora.
 #
-# Copyright (c) 2013-2015 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2016 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -28,6 +28,19 @@
 
 - name: restart lighttpd
   service: name=lighttpd state=restarted
+
+# Control handlers for httpd 
+- name: start httpd
+  service: name=httpd
+           state=started
+
+- name: stop httpd
+  service: name=httpd
+           state=stopped
+
+- name: restart httpd
+  service: name=httpd
+           state=restarted
 
 # Control handlers for mysql
 - name: start mysql
