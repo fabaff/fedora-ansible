@@ -34,7 +34,7 @@ xpud_current: 0.9.2
 linfo_version: 2.0.3
 
 # piwik - http://piwik.org/
-piwik_version: 2.15.0
+piwik_version: 2.16.1
 
 # phpsysinfo - http://rk4an.github.com/phpsysinfo
 phpsysinfo_version: 3.2.4
