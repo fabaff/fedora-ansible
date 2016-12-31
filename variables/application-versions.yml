@@ -2,7 +2,7 @@
 # which will be installed without the package management tool and basic release
 # number as helper variables for playbooks.
 #
-# Copyright (c) 2013-2016 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2017 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
