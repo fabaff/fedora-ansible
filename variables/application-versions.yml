@@ -9,9 +9,9 @@
 ---
 ### Operating systems
 # Fedora - http://fedoraproject.org
-fedora_previous: 23
-fedora_current: 24
-fedora_next: 25
+fedora_previous: 24
+fedora_current: 25
+fedora_next: 26
 
 # Alpine - http://alpinelinux.org/
 alpine_current: 3.5.0
