@@ -31,17 +31,19 @@ Make sure that [Python](http://www.python.org/) is installed. If not, install
 the Python package.
 
 ```bash
-yum -y install python
+$ sudo dnf -y install python
 ```
 Add the SSH key to the *authorized_keys* file.
 
 From the managed node:
+
 ```bash
-ssh root@[IP address of your management system] 'cat ~/.ssh/id_rsa.pub' | cat - >> ~/.ssh/authorized_keys
+$ ssh root@[IP address of your management system] 'cat ~/.ssh/id_rsa.pub' | cat - >> ~/.ssh/authorized_keys
 ```
 From the management system:
+
 ```bash
-sudo ssh-copy-id -i /root/.ssh/id_rsa.pub root@[IP address of your managed node]
+$ sudo ssh-copy-id -i /root/.ssh/id_rsa.pub root@[IP address of your managed node]
 ```
 
 ## Structure
