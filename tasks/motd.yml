@@ -1,38 +1,42 @@
 # This playbook customizes the motd file all Fedora hosts.
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2018 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: distribute motd file for fedora
-  template: src=files/fc-motd.j2
-            dest=/etc/motd
-            owner=root
-            group=root
-            mode=0644
+  template:
+    src: files/fc-motd.j2
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: 0644
   when: ansible_distribution == 'Fedora'
 
 - name: distribute motd file for scientific linux
-  template: src=files/sl-motd.j2
-            dest=/etc/motd
-            owner=root
-            group=root
-            mode=0644
+  template:
+    src: files/sl-motd.j2
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: 0644
   when: ansible_distribution == 'Scientific'
 
 - name: distribute motd file for alpine linux
-  template: src=files/al-motd.j2
-            dest=/etc/motd
-            owner=root
-            group=root
-            mode=0644
+  template:
+    src: files/al-motd.j2
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: 0644
   when: ansible_distribution == 'Alpine'
 
 - name: distribute motd file for debian
-  template: src=files/de-motd.j2
-            dest=/etc/motd
-            owner=root
-            group=root
-            mode=0644
+  template:
+    src: files/de-motd.j2
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: 0644
   when: ansible_distribution == 'Debian'
