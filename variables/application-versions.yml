@@ -49,4 +49,5 @@ phpmyadmin_version: 4.8.3
 dokuwiki_version: 2015-08-10a
 
 # Bootstrap - http://getbootstrap.com
-bootstrap_version: 4.1.1
+bootstrap_version: 4.1.3
+
