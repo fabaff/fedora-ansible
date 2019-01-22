@@ -1,13 +1,14 @@
 # This playbook makes the RPMFusion (http://rpmfusion.org/) repository available.
 #
-# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2019 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: install the rpmfusion repo packages
-  yum: name={{ item }}
-       state=present
+  dnf:
+    name: "{{ item }}"
+    state: present
   with_items:
     - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_current }}.noarch.rpm
     - http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_current }}.noarch.rpm
