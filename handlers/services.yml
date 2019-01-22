@@ -1,6 +1,6 @@
 # This files contains service handlers for Fedora.
 #
-# Copyright (c) 2013-2017 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2019 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -11,53 +11,81 @@
 ---
 # Control handlers for sshd
 - name: start sshd
-  service: name=sshd state=started
+  service:
+    name: sshd
+    state: started
 
 - name: stop sshd
-  service: name=sshd state=stopped
+  service:
+    name: sshd
+    state: stopped
 
 - name: restart sshd
-  service: name=sshd state=restarted
+  service:
+    name: sshd
+    state: restarted
 
 # Control handlers for lighttpd
 - name: start lighttpd
-  service: name=lighttpd state=started
+  service:
+    name: lighttpd
+    state: started
 
 - name: stop lighttpd
-  service: name=lighttpd state=stopped
+  service:
+    name: lighttpd
+    state: stopped
 
 - name: restart lighttpd
-  service: name=lighttpd state=restarted
+  service:
+    name: lighttpd
+    state: restarted
 
 # Control handlers for httpd 
 - name: start httpd
-  service: name=httpd
-           state=started
+  service:
+    name: httpd
+    state: started
 
 - name: stop httpd
-  service: name=httpd
-           state=stopped
+  service:
+    name: httpd
+    state: stopped
 
 - name: restart httpd
-  service: name=httpd
-           state=restarted
+  service:
+    name: httpd
+    state: restarted
 
 # Control handlers for mysql
 - name: start mysql
-  service: name=mysqld state=started
+  service:
+    name: mysqld
+    state: started
 
 - name: stop mysql
-  service: name=mysqld state=stopped
+  service:
+    name: mysqld
+    state: stopped
 
 - name: restart mysql
-  service: name=mysqld state=restarted
+  service:
+    name: mysqld
+    state: restarted
 
 # Control handlers for mosquitto
 - name: start mosquitto
-  service: name=mosquitto state=started
+  service:
+    name: mosquitto
+    state: started
 
 - name: stop mosquitto
-  service: name=mosquitto state=stopped
+  service:
+    name: mosquitto
+    state: stopped
 
 - name: restart mosquitto
-  service: name=mosquitto state=restarted
+  service:
+    name: mosquitto
+    state: restarted
+
