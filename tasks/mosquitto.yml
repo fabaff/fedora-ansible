@@ -1,22 +1,26 @@
 # This playbook install the mosquitto broker (http://mosquitto.org).
 #
-# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2019 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: install mosquitto package
-  yum: pkg={{ item }}
-       state=present 
+  dnf:
+    name: "{{ item }}"
+    state: present
   with_items:
     - mosquitto
 
 - name: configure firewall, allow traffic to port 1883
-  firewalld: port=1883/tcp
-             permanent=true
-             state=enabled
+  firewalld:
+    port: 1883/tcp
+    permanent: true
+    state: enabled
 
 - name: start mosquitto
-  service: name=mosquitto
-           state=running
-           enabled=yes
+  service:
+    name: mosquitto
+    state: running
+    enabled: yes
+
