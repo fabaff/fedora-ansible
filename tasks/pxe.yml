@@ -40,23 +40,6 @@
             dest=/var/lib/tftpboot/pxelinux.cfg/tmp/000-default
             mode=0644
 
-# postition: Int 
-# entry_only: true/false
-# text: 
-
-# 
-# - { include: grub-entry.yml, position: 10, ssh_keys: [ 'keys/one.txt', 'keys/two.txt' ] }
-# - { include: wordpress.yml, position: 10, ssh_keys: [ 'keys/one.txt', 'keys/two.txt' ] }
-# - { include: wordpress.yml, position: 10, ssh_keys: [ 'keys/one.txt', 'keys/two.txt' ] }
-#    vars:
-#        position: 10
-#        some_list_variable:
-#          - alpha
-#          - beta
-#          - gamma
-
-
-
 # PXE elements ###############################################################
 # 001 - 009: Default local operations
 - include: tasks/pxe/001-local.yml
