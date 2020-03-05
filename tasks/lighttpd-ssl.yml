@@ -1,7 +1,7 @@
 # This playbook install the lighttpd (http://www.lighttpd.net/) with FastCGI 
 # (http://www.fastcgi.com), openSSL, and PHP.
 #
-# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2020 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -18,69 +18,79 @@
     - openssl
 
 - name: enable fastcgi support in modules.conf
-  lineinfile: dest=/etc/lighttpd/modules.conf
-              regexp='^include "conf.d/fastcgi.conf"'
-              insertafter='^#include "conf.d/fastcgi.conf"'
-              line='include "conf.d/fastcgi.conf"'
-              state=present
+  lineinfile:
+    dest: /etc/lighttpd/modules.conf
+    regexp: '^include "conf.d/fastcgi.conf"'
+    insertafter: '^#include "conf.d/fastcgi.conf"'
+    line: 'include "conf.d/fastcgi.conf"'
+    state: present
 
 - name: enable fastcgi support
-  template: src=files/fastcgi.j2 
-            dest=/etc/lighttpd/conf.d/fastcgi.conf
-            owner=root
-            group=root
-            mode=0644
+  template:
+    src: files/fastcgi.j2 
+    dest: /etc/lighttpd/conf.d/fastcgi.conf
+    owner: root
+    group: root
+    mode: 0644
 
 - name: create directory for the socket
-  file: path=/var/run/lighttpd
-        state=directory
-        mode=0775
-        owner=lighttpd
-        group=lighttpd
+  file:
+    path: /var/run/lighttpd
+    state: directory
+    mode: 0775
+    owner: lighttpd
+    group: lighttpd
 
 - name: change port for ssl-only
-  lineinfile: dest=/etc/lighttpd/lighttpd.conf
-              regexp='^server.port = 80'
-              line='server.port = 443'
-              state=present
+  lineinfile:
+    dest: /etc/lighttpd/lighttpd.conf
+    regexp: '^server.port = 80'
+    line: 'server.port = 443'
+    state: present
 
 - name: enable ssl support
-  lineinfile: dest=/etc/lighttpd/lighttpd.conf
-              regexp='^ssl.engine = "enable"'
-              insertafter='^##   ssl.engine = "enable"'
-              line='ssl.engine = "enable"'
-              state=present
+  lineinfile:
+    dest: /etc/lighttpd/lighttpd.conf
+    regexp: '^ssl.engine = "enable"'
+    insertafter: '^##   ssl.engine = "enable"'
+    line: 'ssl.engine = "enable"'
+    state: present
 
 - name: set ssl path
-  lineinfile: dest=/etc/lighttpd/lighttpd.conf
-              regexp='^ssl.pemfile = "/path/to/server.pem"'
-              insertafter='^##   ssl.pemfile = "/path/to/server.pem"'
-              line='ssl.pemfile = "/etc/lighttpd/certs/server.pem"'
-              state=present
+  lineinfile:
+    dest: /etc/lighttpd/lighttpd.conf
+    regexp: '^ssl.pemfile = "/path/to/server.pem"'
+    insertafter: '^##   ssl.pemfile = "/path/to/server.pem"'
+    line: 'ssl.pemfile = "/etc/lighttpd/certs/server.pem"'
+    state: present
 
 - name: create directory for certs
-  file: path=/etc/lighttpd/certs
-        state=directory
-        mode=0775
-        owner=lighttpd
-        group=lighttpd
+  file:
+    path: /etc/lighttpd/certs
+    state: directory
+    mode: 0775
+    owner: lighttpd
+    group: lighttpd
 
 - name: create ssl certificates
   command: openssl req -x509 -nodes -days 7300 -subj "/C={{ cert_country }}/ST={{ cert_province }}/L={{cert_city}}/O={{cert_org}}/CN={{cert_cn}}/Email={{cert_email}}" -newkey rsa:2048 -keyout /etc/lighttpd/certs/server.pem -out /etc/lighttpd/certs/server.pem
 
 - name: start lighttpd
-  service: name=lighttpd
-           state=running
-           enabled=yes
+  service:
+    name: lighttpd
+    state: running
+    enabled: yes
 
 - name: configure firewall, allow traffic to port 443
-  firewalld: port=443/tcp
-             permanent=true
-             state=enabled
+  firewalld:
+    port: 443/tcp
+    permanent: true
+    state: enabled
 
 - name: remove lighttpd default file (images)
-  file: path=/var/www/lighttpd/{{ item }}
-        state=absent
+  file:
+    path: /var/www/lighttpd/"{{ item }}"
+    state: absent
   with_items:
     - index.html
     - light_logo.png

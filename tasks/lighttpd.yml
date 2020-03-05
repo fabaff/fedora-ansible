@@ -1,6 +1,6 @@
 # This playbook install the lighttpd with FastCGI and PHP.
 #
-# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2020 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -15,42 +15,48 @@
     - net-tools
 
 - name: enable fastcgi support in modules.conf
-  lineinfile: dest=/etc/lighttpd/modules.conf
-              regexp='^include "conf.d/fastcgi.conf"'
-              insertafter='^#include "conf.d/fastcgi.conf"'
-              line='include "conf.d/fastcgi.conf"'
-              state=present
+  lineinfile:
+    dest: /etc/lighttpd/modules.conf
+    regexp: '^include "conf.d/fastcgi.conf"'
+    insertafter: '^#include "conf.d/fastcgi.conf"'
+    line: 'include "conf.d/fastcgi.conf"'
+    state: present
 
 - name: enable fastcgi support
-  template: src=files/fastcgi.j2 
-            dest=/etc/lighttpd/conf.d/fastcgi.conf
-            owner=lighttpd
-            group=lighttpd
-            mode=0644
+  template:
+    src: files/fastcgi.j2 
+    dest: /etc/lighttpd/conf.d/fastcgi.conf
+    owner: lighttpd
+    group: lighttpd
+    mode: 0644
 
 - name: create directory for the socket
-  file: path=/var/run/lighttpd
-        state=directory
-        mode=0775
-        owner=lighttpd
-        group=lighttpd
+  file:
+    path: /var/run/lighttpd
+    state: directory
+    mode: 0775
+    owner: lighttpd
+    group: lighttpd
 
 - name: start lighttpd
-  service: name=lighttpd
-           state=running
-           enabled=yes
+  service:
+    name: lighttpd
+    state: running
+    enabled: yes
 
 - name: configure firewall, allow traffic to port 80
-  firewalld: port=80/tcp
-             permanent=true
-             state=enabled
+  firewalld:
+    port: 80/tcp
+    permanent: true
+    state: enabled
 
 - name: add some details to the default index.html file
-  lineinfile: dest=/var/www/lighttpd/index.html
-              regexp='^<body>'
-              insertafter='^<body>'
-              line='<body>\n\n<h3>Lighttpd is running on $ansible_distribution $ansible_distribution_version.</h3>'
-              state=present
+  lineinfile:
+     dest: /var/www/lighttpd/index.html
+     regexp: '^<body>'
+     insertafter: '^<body>'
+     line: '<body>\n\n<h3>Lighttpd is running on $ansible_distribution $ansible_distribution_version.</h3>'
+     state: present
 
 # If you want your own index.html file
 #- name: install a default index.html file
