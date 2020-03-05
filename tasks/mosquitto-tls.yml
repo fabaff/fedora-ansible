@@ -1,0 +1,46 @@
+# This playbook install the mosquitto broker (http://mosquitto.org).
+#
+# Copyright (c) 2013-2020 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+---
+- name: install mosquitto package
+  yum:
+    pkg: "{{ item }}"
+    state: present 
+  with_items:
+    - mosquitto
+    - python-paho-mqtt
+    - openssl
+
+- name: create directory for certs
+  file:
+    path: /etc/mosquitto/certs
+    state: directory
+    mode: 0775
+    owner: mosquitto
+    group: mosquitto
+
+- name: enable fastcgi support
+  template:
+    src: files/mosquitto.j2 
+    dest: /etc/mosquitto/mosquitto.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: create ssl certificates
+  command: openssl req -x509 -nodes -days 7300 -subj "/C={{ cert_country }}/ST={{ cert_province }}/L={{ cert_city }}/O={{ cert_org }}/CN={{ cert_cn }}/Email={{ cert_email }}" -newkey rsa:2048 -keyout /etc/mosquitto/certs/server.pem -out /etc/mosquitto/certs/server.pem
+
+- name: configure firewall, allow traffic to port 8883
+  firewalld:
+    port: 8883/tcp
+    permanent: true
+    state: enabled
+
+- name: start mosquitto
+  service:
+    name: mosquitto
+    state: running
+    enabled: yes
