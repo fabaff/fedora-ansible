@@ -7,7 +7,7 @@
 # Based on a playbook by https://github.com/fourkitchens/server-playbooks
 ---
 - name: install mysql and related packages
-  yum:
+  dnf:
     pkg: "{{ item }}"
     state: present
   with_items:
