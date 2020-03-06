@@ -1,47 +1,52 @@
 # This playbook install the mosquitto broker (http://mosquitto.org).
 # (http://erdgeist.org/arts/software/opentracker/).
 #
-# Copyright (c) 2013 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2020 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: install mosquitto package
-  yum: pkg=$item
-       state=present 
+  dnf:
+    pkg: "{{ item }}"
+    state: present 
   with_items:
     - mosquitto
     - mosquitto-python
 
-- name: configure firewall, allow traffic on port 1883
-  command: /usr/bin/firewall-cmd --permanent --add-port=1883/tcp
-
-- name: reload firewall configuration
-  command: /usr/bin/firewall-cmd --reload
+- name: configure firewall, allow traffic to port 1883
+  firewalld:
+    port: 1883/tcp
+    permanent: true
+    state: enabled
 
 - name: start mosquitto
-  service: name=mosquitto
-           state=running
-           enabled=yes
+  service:
+    name: mosquitto
+    state: running
+    enabled: yes
 
 - name: copy the python script to the test bench
-  copy: src=files/mqtt_pub.py
-        dest=/usr/bin/mqtt_pub.py
-        owner=root
-        group=root
-        mode=0775
+  copy:
+    src: files/mqtt_pub.py
+    dest: /usr/bin/mqtt_pub.py
+    owner: root
+    group: root
+    mode: 0775
 
 - name: copy systemd service for publishing mqtt messages
-  template: src=files/mqtt_pub-service.j2 
-            dest=/lib/systemd/system/mqtt_pub.service
-            owner=root
-            group=root
-            mode=0644
+  template:
+    src: files/mqtt_pub-service.j2 
+    dest: /lib/systemd/system/mqtt_pub.service
+    owner: root
+    group: root
+    mode: 0644
 
 - name: reload systemd
   command: /usr/bin/systemctl --system daemon-reload
 
 - name: start mqtt_pub
-  service: name=mqtt_pub
-           state=running
-           enabled=yes
+  service:
+    name: mqtt_pub
+    state: running
+    enabled: yes
