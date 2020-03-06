@@ -1,42 +1,47 @@
 # This playbook install the miniDLNA (http://sourceforge.net/projects/minidlna/)
 # server.
 #
-# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2020 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 # minidlna is only available from RPMFusion.
 ---
 - name: install minidlna package
-  yum: pkg={{ item }}
-       state=present
+  dnf:
+    pkg: "{{ item }}"
+    state: present
   with_items:
     - minidlna
 
 - name: create a directory for the media files
-  file: path=/opt/media/
-        mode=0755
-        state=directory
+  file:
+    path: /opt/media/
+    mode: 0755
+    state: directory
 
 - name: download a media file
-  get_url: url=http://www.vorbis.com/music/Epoq-Lepidoptera.ogg
-           dest=/opt/media/Epoq-Lepidoptera.ogg
-           mode=0440
+  get_url:
+    url: http://www.vorbis.com/music/Epoq-Lepidoptera.ogg
+    dest: /opt/media/Epoq-Lepidoptera.ogg
+    mode: 0440
 
 - name: enable additional cgi support
-  template: src=files/minidlna-conf.j2
-            dest=/etc/minidlna.conf
-            owner=root
-            group=root
-            mode=0644
+  template:
+    src: files/minidlna-conf.j2
+    dest: /etc/minidlna.conf
+    owner: root
+    group: root
+    mode: 0644
 
-- name: configure firewall, allow traffic on port 8200
-  command: /usr/bin/firewall-cmd --permanent --add-port=8200/tcp
-
-- name: reload firewall configuration
-  command: /usr/bin/firewall-cmd --reload
+- name: configure firewall, allow traffic to port 8200
+  firewalld:
+    port: 8200/tcp
+    permanent: true
+    state: enabled
 
 - name: start minidlna
-  service: name=minidlna
-           state=running
-           enabled=yes
+  service:
+    name: minidlna
+    state: running
+    enabled: yes
