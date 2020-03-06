@@ -1,13 +1,14 @@
 # This playbook install the samba (http://www.samba.org/) server.
 #
-# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2020 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: install samba and related packages
-  yum: pkg={{ item }}
-       state=present 
+  dnf:
+    pkg: "{{ item }}"
+    state: present 
   with_items:
     - cups-libs
     - samba
@@ -15,14 +16,16 @@
     - samba-client
 
 - name: create a directory to share
-  file: path=/opt/samba/
-        mode=0755
-        state=directory
+  file:
+    path: /opt/samba/
+    mode: 0755
+    state: directory
 
 - name: put a dummy file in the share
-  template: src=files/default.j2
-            dest=/opt/samba/info.txt
-            mode=0644
+  template:
+    src: files/default.j2
+    dest: /opt/samba/info.txt
+    mode: 0644
 
 - name: set selinux boolean
   command: /usr/sbin/setsebool -P allow_smbd_anon_write=1
@@ -34,27 +37,32 @@
   command: /usr/bin/chcon -t samba_share_t /opt/samba/
 
 - name: add a share
-  lineinfile: dest=/etc/samba/smb.conf
-              regexp=''
-              insertafter=EOF
-              line='[samba]\n\tpath = /opt/samba/\n\tread only = no\n;\tbrowseable = yes\n'
+  lineinfile:
+    dest: /etc/samba/smb.conf
+    regexp: ''
+    insertafter: EOF
+    line: '[samba]\n\tpath = /opt/samba/\n\tread only = no\n;\tbrowseable = yes\n'
 
 - name: configure firewall, allow samba traffic
-  firewalld: service=samba
-             permanent=true
-             state=enabled
+  firewalld:
+    service: samba
+    permanent: true
+    state: enabled
 
 - name: configure firewall, allow samba-client traffic
-  firewalld: service=samba-client
-             permanent=true
-             state=enabled
+  firewalld:
+    service: samba-client
+    permanent: true
+    state: enabled
 
 - name: start samba
-  service: name=smb
-           state=running
-           enabled=yes
+  service:
+    name: smb
+    state: running
+    enabled: yes
 
 - name: start named
-  service: name=nmb
-           state=running
-           enabled=yes
+  service:
+    name: nmb
+    state: running
+    enabled: yes
