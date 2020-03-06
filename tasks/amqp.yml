@@ -1,0 +1,27 @@
+# This playbook install zeromq server (http://www.mysql.com/).
+#
+# Copyright (c) 2013-2020 Fabian Affolter <fabian@affolter-engineering.ch>
+#
+# Licensed under CC BY 3.0. All rights reserved.
+#
+# Based on a playbook by https://github.com/fourkitchens/server-playbooks
+---
+- name: install mysql and related packages
+  yum:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+    - python-zmq
+    - zeromq
+
+- name: start mysql service and enable the service
+  service:
+    name: mysqld
+    state: started
+    enabled: yes
+
+- name: configure firewall, allow traffic on port 5556
+  command: /usr/bin/firewall-cmd --permanent --add-port=5556/tcp
+
+- name: reload firewall configuration
+  command: /usr/bin/firewall-cmd --reload
