@@ -20,8 +20,8 @@
     state: started
     enabled: yes
 
-- name: configure firewall, allow traffic on port 5556
-  command: /usr/bin/firewall-cmd --permanent --add-port=5556/tcp
-
-- name: reload firewall configuration
-  command: /usr/bin/firewall-cmd --reload
+- name: configure firewall, allow traffic to port 8200
+  firewalld:
+    port: 5556/tcp
+    permanent: true
+    state: enabled
