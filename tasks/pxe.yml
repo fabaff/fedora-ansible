@@ -1,13 +1,14 @@
 # This playbook creates a PXE server.
 #
-# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2020 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: install needed packages
-  yum: pkg={{ item }}
-       state=present
+  dnf:
+    pkg: "{{ item }}"
+    state: present
   with_items:
     - tftp-server
     - syslinux
@@ -22,23 +23,27 @@
   command: /usr/bin/cp /usr/share/syslinux/memdisk /var/lib/tftpboot/memdisk
 
 - name: create the pxelinux.cfg directory
-  file: path=/var/lib/tftpboot/pxelinux.cfg
-        mode=0755
-        state=directory
+  file:
+    path: /var/lib/tftpboot/pxelinux.cfg
+    mode: 0755
+    state: directory
 
 - name: create the tmp directory for storing the configuration fragments
-  file: path=/var/lib/tftpboot/pxelinux.cfg/tmp
-        mode=0755
-        state=directory
+  file:
+    path: /var/lib/tftpboot/pxelinux.cfg/tmp
+    mode: 0755
+    state: directory
 
 - name: copy the background image for the menu
-  copy: src=files/pxe/background.png
-        dest=/var/lib/tftpboot/background.png
+  copy:
+    src: files/pxe/background.png
+    dest: /var/lib/tftpboot/background.png
 
 - name: put a configuration fragement for default part in place
-  template: src=files/pxe/000-default.j2
-            dest=/var/lib/tftpboot/pxelinux.cfg/tmp/000-default
-            mode=0644
+  template:
+    src: files/pxe/000-default.j2
+    dest: /var/lib/tftpboot/pxelinux.cfg/tmp/000-default
+    mode: 0644
 
 # PXE elements ###############################################################
 # 001 - 009: Default local operations
@@ -77,30 +82,36 @@
 # Finishing tasks #############################################################
 
 - name: assemble the default file
-  assemble: src=/var/lib/tftpboot/pxelinux.cfg/tmp
-            dest=/var/lib/tftpboot/pxelinux.cfg/default
+  assemble:
+    src: /var/lib/tftpboot/pxelinux.cfg/tmp
+    dest: /var/lib/tftpboot/pxelinux.cfg/default
 
 - name: delete the tmp directory
-  file: path=/var/lib/tftpboot/pxelinux.cfg/tmp
-        state=absent
+  file:
+    path: /var/lib/tftpboot/pxelinux.cfg/tmp
+    state: absent
 
 - name: set the permission
-  file: path=/var/lib/tftpboot/pxelinux.cfg/default
-        mode=0644
-        state=file
+  file:
+    path: /var/lib/tftpboot/pxelinux.cfg/default
+    mode: 0644
+    state: file
 
 - name: enable tftp in xinetd
   command: /usr/bin/sed -i 's|\sdisable\s\{3,\}= yes|\tdisable \t\t= no|g' /etc/xinetd.d/tftp
 
 - name: configure firewall, allow traffic to port 69 for tftp
-  firewalld: port=69/tcp
-             permanent=true
-             state=enabled
+  firewalld:
+    port: 69/tcp
+    permanent: true
+    state: enabled
 
 - name: reload firewall configuration
   command: /usr/bin/firewall-cmd --reload
 
 - name: start and enable xinetd service
-  service: name=xinetd
-           state=running
-           enabled=yes
+  service:
+    name: xinetd
+    state: running
+    enabled: yes
+
