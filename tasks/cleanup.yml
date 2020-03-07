@@ -1,6 +1,6 @@
 # This playbook remove all components which were needed for the setup. 
 #
-# Copyright (c) 2013-2019 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2020 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -24,5 +24,3 @@
   with_items:
     - yum
 
-- name: reload firewall configuration
-  command: /usr/bin/firewall-cmd --reload
