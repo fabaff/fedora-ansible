@@ -1,6 +1,6 @@
 # This playbook customizes the motd file all Fedora hosts.
 #
-# Copyright (c) 2013-2019 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2020 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
