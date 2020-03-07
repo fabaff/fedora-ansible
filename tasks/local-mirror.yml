@@ -1,54 +1,61 @@
 # This playbook setup a local mirror.
 #
-# Copyright (c) 2013-2014 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2020 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 - name: install needed package
-  yum: pkg={{ item }}
-       state=present
+  dnf:
+    pkg: "{{ item }}"
+    state: present
   with_items:
     - yum-utils
     - repoview
     - createrepo
 
 - name: copy the repo file
-  copy: src=files/fedora-mirror.repo
-        dest=/etc/yum.repos.d/fedora-mirror.repo
-        owner=root
-        group=root
-        mode=0644
+  copy:
+    src: files/fedora-mirror.repo
+    dest: /etc/yum.repos.d/fedora-mirror.repo
+    owner: root
+    group: root
+    mode: 0644
 
 - name: create directory to store data
-  file: path=/srv/mirror
-        state=directory
-        owner=lighttpd
-        group=lighttpd
-        mode=0755
+  file:
+    path: /srv/mirror
+    state: directory
+    owner: lighttpd
+    group: lighttpd
+    mode: 0755
 
 - name: crontab entry for reposync
-  cron: name="sync repo"
-        hour="5,2"
-        job="reposync -r x86_64 -p /srv/mirror > /dev/null"  
+  cron:
+    name: "sync repo"
+    hour: "5,2"
+    job: "reposync -r x86_64 -p /srv/mirror > /dev/null"  
 
 - name: crontab entry for createrepo
-  cron: name="create repo"
-        hour="6,3"
-        job="createrepo --database /srv/mirror > /dev/null"
+  cron:
+    name: "create repo"
+    hour: "6,3"
+    job: "createrepo --database /srv/mirror > /dev/null"
 
 - name: crontab entry for repoview
-  cron: name="build repoview"
-        hour="7,4"
-        job="repoview --title 'Local mirror x86 64' /srv/mirror > /dev/null"
+  cron:
+    name: "build repoview"
+    hour: "7,4"
+    job: "repoview --title 'Local mirror x86 64' /srv/mirror > /dev/null"
 
 - name: create sym link to the web server root
-  file: src=/srv/mirror/repoview
-        dest=/var/www/lighttpd/repoview
-        owner=root
-        group=root
-        mode=0775
-        state=link
+  file:
+    src: /srv/mirror/repoview
+    dest: /var/www/lighttpd/repoview
+    owner: root
+    group: root
+    mode: 0775
+    state: link
 
 - name: set selinux context
   command: /usr/bin/chcon -h unconfined_u:object_r:httpd_log_t:s0 /srv/mirror
