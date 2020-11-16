@@ -14,7 +14,7 @@ fedora_current: 33
 fedora_next: 34
 
 # Alpine - http://alpinelinux.org/
-alpine_current: 3.11.6
+alpine_current: 3.12.1
 
 # Freedos - http://www.freedos.org
 freedos_previous: 1.0
