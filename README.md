@@ -17,7 +17,7 @@ A lot of playbooks in this repository are made and used with the
 [Fedora Security Lab Test bench](https://fedorahosted.org/security-spin/wiki/Test%20bench). 
 For all security-related playbooks please check the 
 [Fedora Security Lab Test bench](https://github.com/fabaff/fsl-test-bench) git
-repository .
+repository.
 
 ## Prerequisites
 
