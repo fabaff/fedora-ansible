@@ -2,16 +2,16 @@
 # which will be installed without the package management tool and basic release
 # number as helper variables for playbooks.
 #
-# Copyright (c) 2013-2022 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2023 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
 ### Operating systems
 # Fedora - http://fedoraproject.org
-fedora_previous: 35
-fedora_current: 36
-fedora_next: 37
+fedora_previous: 36
+fedora_current: 37
+fedora_next: 38
 
 # Alpine - http://alpinelinux.org/
 alpine_current: 3.16.2
