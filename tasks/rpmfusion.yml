@@ -5,6 +5,14 @@
 # Licensed under CC BY 3.0. All rights reserved.
 #
 ---
+- name: "Add rpmfustion repo gpg keys"
+  ansible.builtin.rpm_key:
+    key: "{{ item }}"
+    state: present
+  with_items: 
+    - "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020"
+    - "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020"
+
 - name: install the rpmfusion repo packages
   dnf:
     name: "{{ item }}"
