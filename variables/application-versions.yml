@@ -2,7 +2,7 @@
 # which will be installed without the package management tool and basic release
 # number as helper variables for playbooks.
 #
-# Copyright (c) 2013-2024 Fabian Affolter <fabian@affolter-engineering.ch>
+# Copyright (c) 2013-2025 Fabian Affolter <fabian@affolter-engineering.ch>
 #
 # Licensed under CC BY 3.0. All rights reserved.
 #
@@ -14,7 +14,7 @@ fedora_current: 41
 fedora_next: 42
 
 # Alpine - http://alpinelinux.org/
-alpine_current: 3.20.3
+alpine_current: 3.20.4
 
 # Freedos - http://www.freedos.org
 freedos_previous: 1.0
